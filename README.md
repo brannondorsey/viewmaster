@@ -1,31 +1,27 @@
-#Viewmaster Virtual Narrative Companion
+#Viewmaster Narrative Companion
 
 A companion command line application for use with physical Viewmaster reels.
 
-A user inserts reels into their Viewmaster and then uses the Viewmaster Virtual Narrative Companion on their computer's terminal to create and edit fictional histories of the images they are viewing. The Narrative companion acts as a wiki style authorial narrative database for adding contextual and imaginative language to 3D Viewmaster travel images of the past.
+A user inserts reels into their Viewmaster and then uses the Viewmaster Narrative Companion on their computer's terminal to create and edit fictional histories of the images they are viewing. The Narrative companion acts as a wiki style authorial narrative database for adding contextual and imaginative language to 3D Viewmaster travel images of the past.
 
-##Example Commands
+##Commands
 
 - `help`
 - `using <reelNumber>`
 - `next`
 - `go to <imageNumber>`
 - `get description`
-- `add description`
-- ~~`edit description`~~
-- ~~`edit history`~~
 - `get history`
 - `get event list`
 - `get event [name]`
-- `add event`
 - `get item list`
-- `add item`
 - `get <item> description`
-- `add <item> description`
 - `get <item> notes`
+- `add description`
+- `add event`
+- `add item`
+- `add <item> description`
 - `add <item> note`
-
-all ~~crossouts~~ notate features to come.
 
 ##Usage
 
@@ -39,15 +35,25 @@ all ~~crossouts~~ notate features to come.
 
 `get description`: shows you the current description of the location that you are viewing
 
-`add description`: adds a description or overwrites the one that already exists
+`get history`: displays all of the events associated with the location that you are viewing in chronological order
 
-`get history`: shows you all of the events associated with the location that you are viewing in chronological order
+`get event list`: prints a list of all event names
 
-`get next event`: shows you the next event associated with the location that you are viewing
+`get event [name]`: prints the event that matches `[name]` if it was provided or a random event if it was not
 
-`get previous|prev event`: shows you the previous event associated with the location that you are viewing
+`get item list`: prints a list of all item names
 
-`get event`: shows you a random event associated with the location that you are viewing
+`get <item> description`: prints a the description of `<item>`
 
-`add event`: adds an event to the event list
+`get <item> notes`: prints all of the notes associated with the `<item>`
+
+`add description`: add or overwrite the location's description
+
+`add event`: adds an event to the location
+
+`add item`: adds an item to the location
+
+`add <item> description`: adds a description to the `<item>`
+
+`add <item> note`: adds a new note to the `<item>`
 

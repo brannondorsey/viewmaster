@@ -1,0 +1,73 @@
+[
+	{
+		"usage": "help",
+		"description": "prints a list of all commands and descriptions of their usage"
+	},
+	{
+		"usage": "using <reelNumber>",
+		"regex": "/using [0-9]{1, 4}/i",
+		"description": "specifies the reel ID number using <realNumber>"
+	},
+	{
+		"usage": "next",
+		"description": "notifies the program that you have advanced the reel once"
+	},
+	{
+		"usage": "go to <imageNumber>",
+		"regex": "/go to [0-7]/i",
+		"description": "notifies the program that you are viewing the image at <imageNumber>"
+	},
+	{
+		"usage": "get description",
+		"description": "shows you the current description of the location that you are viewing"
+	},
+	{
+		"usage": "get history",
+		"description": "shows you all of the events associated with the location that you are viewing in chronological order"
+	},
+	{
+		"usage": "get event list",
+		"description": "prints a list of all event names"
+	},
+	{
+		"usage": "get event [name]",
+		"regex": "/get event[0-9a-zA-Z_ ]*/i",
+		"description": "prints the event that matches [name] if it was provided or a random event if it was not"
+	},
+	{
+		"usage": "get item list",
+		"description": "prints a list of all item names"
+	},
+	{
+		"usage": "get <item> description",
+		"regex": "/get [0-9a-zA-Z_ ]{1,40} description/i",
+		"description": "prints a description of the item"
+	},
+	{
+		"usage": "get <item> notes",
+		"regex": "/get [0-9a-zA-Z_ ]{1,40} notes/i",
+		"description": "prints all of the notes associated with the <item>"
+	},
+	{
+		"usage": "add description",
+		"description": "add or overwrite the location's description"
+	},
+	{
+		"usage": "add event",
+		"description": "adds an event to the location"
+	},
+	{
+		"usage": "add item",
+		"description": "adds an item to the location"
+	},
+	{
+		"usage": "add <item> description",
+		"regex": "/add [0-9a-zA-Z_ ]{1,40} description/i",
+		"description": "adds a description to the <item>"
+	},
+	{
+		"usage": "add <item> note",
+		"regex": "/add [0-9a-zA-Z_ ]{1,40} note/i",
+		"description": "adds a new note to the <item>"
+	}
+]
