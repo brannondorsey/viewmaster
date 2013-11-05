@@ -1,0 +1,18 @@
+{
+  "name": "Viewmaster Virtual Narrative Companion",
+  "version": "0.0.1",
+  "author": "Brannon Dorsey <brannon@brannondorsey.com>",
+  "description": "A companion command line application for use with physical Viewmaster reels.",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/brannondorsey/viewmaster.git"
+  },
+  "keywords": [
+    "viewmaster",
+    "command line"
+  ],
+  "dependencies" : {
+    "commander"   :  "1.3.2"
+  },
+  "license": "MIT"
+}
