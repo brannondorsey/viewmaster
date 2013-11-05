@@ -16,17 +16,14 @@ A user inserts reels into their Viewmaster and then uses the Viewmaster Virtual 
 - ~~`edit history`~~
 - `get history`
 - `get event list`
-- `get next event`
-- `get previous|prev event`
-- `get event`
+- `get event [name]`
 - `add event`
 - `get item list`
 - `add item`
-- `get item event`
 - `get <item> description`
 - `add <item> description`
-- `get <item> event`
-- `add <item> event`
+- `get <item> notes`
+- `add <item> note`
 
 all ~~crossouts~~ notate features to come.
 

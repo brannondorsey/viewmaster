@@ -20,7 +20,7 @@
 		},
 		{
 			"prompt": "Please describe the event assosciated with this item.",
-			"variableName": "event"
+			"variableName": "body"
 		}
 	],
 	"addItem" : [
@@ -33,26 +33,14 @@
 			"variableName": "description" 
 		},
 		{
-			"prompt": "Would you like to add an event to this item (y/n)?",
-			"variableName": "addItemEvent" 
+			"prompt": "Would you like to add a note to this item (y/n)?",
+			"variableName": "addItemNote" 
 		}
 	],
-	"addItemEvent": [
+	"addItemNote": [
 		{
-			"prompt": "What is the event assosciated with this item called?",
-			"variableName": "name"
-		},
-		{
-			"prompt": "In what year did the event occur (YYYY)?",
-			"variableName" : "year"
-		},
-		{
-			"prompt": "In what season did the event occur (i.e. Fall)?",
-			"variableName" : "season"
-		},
-		{
-			"prompt": "Please describe the event assosciated with this item.",
-			"variableName": "event"
+			"prompt": "What does the note say?",
+			"variableName": "note"
 		}
 	]
 }

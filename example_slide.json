@@ -1,0 +1,21 @@
+{
+	"description": "An old fort that no one has used for a long time",
+	"events": [
+		{
+			"name": "Hall Canyon",
+			"year": "1976",
+			"season": "Fall",
+			"body": "This is where you say what actually happened."
+		},
+	],
+	"items": [
+		{
+			"name": "Old Car",
+			"description": "An old rusty car that has layed in a ditch for as long as anyone can remember",
+			"notes": [
+				"The old car looks to be an early Mercedes",
+				"The carcus of a small animal lies in the backseat"
+			]
+		}
+	]
+}
