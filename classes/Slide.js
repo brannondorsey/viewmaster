@@ -1,4 +1,4 @@
-var DataHandler = require("classes/DataHandler");
+var DataHandler = require("./DataHandler");
 var dataHand = new DataHandler(); //keep dataHand private
 
 function Slide(reelNumber, imageNumber){
@@ -45,6 +45,7 @@ Slide.prototype.addEventDescription = function(description){
 
 Slide.prototype.addItemName = function(name){
 	this.newItem.name = name;
+	console.log("I added an item name!");
 }
 
 Slide.prototype.addItemDescription = function(description){
@@ -117,7 +118,7 @@ Slide.prototype.getHistory = function(){
 //returns an event object on success and false on failure
 Slide.prototype.getEvent = function(name){
 	var index;
-	if(name !== 'undefine'){
+	if(typeof name !== 'undefine'){
 		return this._getEventByName(name);
 	}else{
 		var random = Math.floor(Math.random() * this.events.length);
@@ -134,7 +135,7 @@ Slide.prototype.getEventList = function(){
 }
 
 Slide.prototype.advance = function(imageNumber){
-	if(imageNumber !== 'undefined') {
+	if(typeof imageNumber !== 'undefined') {
 		this = new Slide(this.reelNumber, imageNumber);
 	}else{
 		var newImageNumber = (this.imageNumber < 7) ? this.imageNumber : 1;
@@ -148,7 +149,7 @@ Slide.prototype.newReel = function(reelNumber){
 
 //returns event obj if one is found and false if one is not
 Slide.prototype._getEventByName = function(name){
-	for(int i = 0; i < this.events.length; i++){
+	for(var i = 0; i < this.events.length; i++){
 		if(this.events[i].name == name) return this.events[i];
 	}
 	return false;
