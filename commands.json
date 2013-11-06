@@ -1,73 +1,160 @@
 [
 	{
 		"usage": "help",
-		"description": "prints a list of all commands and descriptions of their usage"
+		"description": "prints a list of all commands and descriptions of their usage",
+		"function": "printHelp",
+		"class": "commands"
 	},
 	{
 		"usage": "using <reelNumber>",
-		"regex": "/using [0-9]{1, 4}/i",
-		"description": "specifies the reel ID number using <realNumber>"
+		"regex": "/using [0-9]{1,4}/i",
+		"error": "a 1-4 digit reelNumber must be provided (i.e. 'using 5')",
+		"description": "specifies the reel ID number using <realNumber>",
+		"function": "newReel",
+		"class": "slide"
 	},
 	{
 		"usage": "next",
-		"description": "notifies the program that you have advanced the reel once"
+		"description": "notifies the program that you have advanced the reel once",
+		"function": "next",
+		"class": "slide"
 	},
 	{
 		"usage": "go to <imageNumber>",
 		"regex": "/go to [0-7]/i",
-		"description": "notifies the program that you are viewing the image at <imageNumber>"
+		"error": "an image number between 1 and 7 must be provided (i.e. 'go to 7')",
+		"description": "notifies the program that you are viewing the image at <imageNumber>",
+		"function": "advance",
+		"class": "slide"
 	},
 	{
 		"usage": "get description",
-		"description": "shows you the current description of the location that you are viewing"
+		"description": "shows you the current description of the location that you are viewing",
+		"function": "printDescription",
+		"class": "slide"
 	},
 	{
 		"usage": "get history",
-		"description": "shows you all of the events associated with the location that you are viewing in chronological order"
+		"description": "shows you all of the events associated with the location that you are viewing in chronological order",
+		"class": "slide"
 	},
 	{
 		"usage": "get event list",
-		"description": "prints a list of all event names"
+		"description": "prints a list of all event names",
+		"class": "slide"
 	},
 	{
 		"usage": "get event [name]",
 		"regex": "/get event[0-9a-zA-Z_ ]*/i",
-		"description": "prints the event that matches [name] if it was provided or a random event if it was not"
+		"description": "prints the event that matches [name] if it was provided or a random event if it was not",
+		"class": "slide"
 	},
 	{
 		"usage": "get item list",
-		"description": "prints a list of all item names"
+		"description": "prints a list of all item names",
+		"class": "slide"
 	},
 	{
 		"usage": "get <item> description",
-		"regex": "/get [0-9a-zA-Z_ ]{1,40} description/i",
-		"description": "prints a description of the item"
+		"regex": "/get [0-9a-zA-Z ]{2,25} description/i",
+		"error": "You must provide a valid item name containing between 2-25 letters, numbers, and spaces (i.e. 'get shovel description')",
+		"description": "prints a description of the item",
+		"class": "slide"
 	},
 	{
 		"usage": "get <item> notes",
-		"regex": "/get [0-9a-zA-Z_ ]{1,40} notes/i",
-		"description": "prints all of the notes associated with the <item>"
+		"regex": "/get [0-9a-zA-Z_ ]{2,25} notes/i",
+		"error": "You must provide a valid item name containing between 2-25 letters, numbers, and spaces (i.e. 'get shovel notes')",
+		"description": "prints all of the notes associated with the <item>",
+		"class": "slide"
 	},
 	{
 		"usage": "add description",
-		"description": "add or overwrite the location's description"
+		"description": "add or overwrite the location's description",
+		"prompts": [
+			{
+				"prompt": "Please describe this location.",
+				"regex": "/.{25,}/i",
+				"error": "Location descriptions must be longer than 25 characters",
+				"function": "addDescription",
+				"class": "slide"
+			}
+		],
+		"function": "saveDescription",
+		"class": "slide"
 	},
 	{
 		"usage": "add event",
-		"description": "adds an event to the location"
+		"description": "adds an event to the location",
+		"prompts": [
+			{
+				"prompt": "What is the event called?",
+				"regex": "/[a-zA-Z0-9 ]{2,25}/i",
+				"error": "Event names must must be between 2-25 characters and may contain only letters, digits, and spaces",
+				"function" : "addEventName",
+				"class": "slide"
+			},
+			{
+				"prompt": "In what year did the event occur (YYYY)?",
+				"regex": "/[0-9][0-9][0-9][0-9]/i",
+				"error": "Years must be specified using four digits",
+				"function" : "addEventYear",
+				"class": "slide"
+			},
+			{
+				"prompt": "In what season did the event occur (i.e. Fall)?",
+				"regex": "/(spring)|(summer)|(fall)|(winter)/i",
+				"error": "Only the seasons spring, summer, fall, and winter are accepted",
+				"function" : "addEventSeason",
+				"class": "slide"
+			},
+			{
+				"prompt": "Please describe the event assosciated with this item.",
+				"regex": "/.{25,}/i",
+				"error": "Event descriptions must be longer than 25 characters",
+				"function": "addEventDescription",
+				"class": "slide"
+			}
+		],
+		"function": "saveEvent",
+		"class": "slide"
 	},
 	{
 		"usage": "add item",
-		"description": "adds an item to the location"
-	},
-	{
-		"usage": "add <item> description",
-		"regex": "/add [0-9a-zA-Z_ ]{1,40} description/i",
-		"description": "adds a description to the <item>"
+		"description": "adds an item to the location",
+		"prompts": [
+			{
+				"prompt": "What is this item called?",
+				"regex": "/[a-zA-Z0-9 ]{2,25}/i",
+				"error": "Item names must must be between 2-25 characters and may contain only letters, digits, and spaces",
+				"function": "addItemName",
+				"class": "slide"
+			},
+			{
+				"prompt": "Please describe this item.",
+				"regex": "/.{10,}/i",
+				"error": "Item descriptions must be longer than 10 characters",
+				"function": "addItemDescription",
+				"class": "slide"
+			}
+		],
+		"function": "saveItem",
+		"class": "slide"
 	},
 	{
 		"usage": "add <item> note",
-		"regex": "/add [0-9a-zA-Z_ ]{1,40} note/i",
-		"description": "adds a new note to the <item>"
+		"regex": "/add [0-9a-zA-Z_ ]{2,25} note/i",
+		"error": "You must provide a valid item name containing between 2-25 letters, numbers, and spaces (i.e. 'add shovel note')",
+		"description": "adds a new note to the <item>",
+		"prompts": [
+			{
+				"prompt": "What does the note say?",
+				"regex": "/.{20,}/i",
+				"error": "Item notes must be at least 20 characters in length",
+				"function": "addItemNote"
+			}
+		],
+		"function": "saveNote",
+		"class": "slide"
 	}
 ]

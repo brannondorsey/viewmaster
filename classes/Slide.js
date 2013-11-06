@@ -1,11 +1,106 @@
 function Slide(reelNumber, imageNumber){
+	this.logChanges = true;
 	this.reelNumber = reelNumber;
 	this.imageNumber = imageNumber;
 	var data = DataHandler.loadData(reelNumber, imageNumber);
 	this.description = data.description;
 	this.events = data.events;
 	this.items = data.items;
+	this.newEvent = {};
+	this.newItem = {};
+	this.newItem.notes = [];
 }
+
+//------------------------------------------------------------------
+//Functions for updating this slides properties
+
+Slide.prototype.addDescription = function(description){
+	this.description = description;
+}
+
+//------------------------------------------------------------------
+//Functions for updating this.newEvent
+
+Slide.prototype.addEventName = function(name){
+	this.newEvent.name = name;
+}
+
+Slide.prototype.addEventYear = function(year){
+	this.newEvent.year = year;
+}
+
+Slide.prototype.addEventSeason = function(season){
+	this.newEvent.season = season;
+}
+
+Slide.prototype.addEventDescription = function(description){
+	this.newEvent.description = description;
+}
+
+//------------------------------------------------------------------
+//Functions for updating this.newItem
+
+Slide.prototype.addItemName = function(name){
+	this.newItem.name = name;
+}
+
+Slide.prototype.addItemDescription = function(description){
+	this.newItem.description = description;
+}
+
+//returns true on success and false on failure
+Slide.prototype.addItemNote = function(itemName, note){
+	for(var i = 0; i < this.items.length; i++){
+		if(this.items[i].name == itemName){
+			this.items[i].notes.push(note);
+			return true;
+		}
+	}
+	return false;
+}
+
+//------------------------------------------------------------------
+//Forwards and functions for saving and reloading slide data
+
+Slide.prototype.saveDescription = function(){
+	if(dataHand.saveDescription(this.reelNumber, this.imageNumber, this.description)){
+		this.reload();
+		this.description = ""; //clear the description
+		if(this.logChanges) console.log("Descpription saved");
+	}console.log("Error saving description");
+}
+
+Slide.prototype.saveEvent = function(){
+	if(dataHand.saveEvent(this.reelNumber, this.imageNumber, this.newEvent)){
+		//this.events.push(this.newEvent);
+		this.reload();
+		this.newEvent = {}; //clear this.newEvent
+		if(this.logChanges) console.log("Event saved");
+	}console.log("Error saving event");
+}
+
+Slide.prototype.saveItem = function(bFromSaveNoteFunction){
+	if(dataHand.saveItem(this.reelNumber, this.imageNumber, this.newItem)){
+		this.reload();
+		this.newItem = {}; //clear this.newEvent
+		if(this.logChanges){
+			var output;
+			if(bFromSaveNoteFunction) output = "Note saved";
+			else output = "Item saved. You should add some notes too: 'add <item> note'"
+			console.log(output);
+		}
+	}console.log("Error saving item");
+}
+
+Slide.prototype.saveNote = function(){
+	this.saveItem(true); //just resave the item because its notes property was updated
+}
+
+Slide.prototype.reload = function(){
+	this = new Slide(this.realNumber, this.imageNumber);
+}
+
+//------------------------------------------------------------------
 
 Slide.prototype.getHistory = function(){
 	var copy = this.events.slice(0);
@@ -35,40 +130,13 @@ Slide.prototype.getEventList = function(){
 	return eventNames.reverse();
 }
 
-Slide.prototype.addEvent = function(_name, _year, _season, _body){
-	var eventObj = {
-		name: _name,
-		year: _year,
-		season: _season,
-		body: _body
+Slide.prototype.advance = function(imageNumber){
+	if(imageNumber !== 'undefined') {
+		this = new Slide(this.reelNumber, imageNumber);
+	}else{
+		var newImageNumber = (this.imageNumber < 7) ? this.imageNumber : 1;
+		this = new Slide(this.reelNumber, newImageNumber);
 	}
-	this.events.push(eventObj);
-}
-
-Slide.prototype.addItem = function(_name, _description, _notes){
-	if(notes === undefined) notes = [];
-	var itemObj = {
-		name = _name;
-		description = _description;
-		notes = _notes;
-	}
-	this.items.push(itemObj);
-}
-
-//returns true on success and false on failure
-Slide.prototype.addItemNote = function(itemName, note){
-	for(var i = 0; i < this.items.length; i++){
-		if(this.items[i].name == itemName){
-			this.items[i].notes.push(note);
-			return true;
-		}
-	}
-	return false;
-}
-
-Slide.prototype.advance = function(){
-	var newImageNumber = (this.imageNumber < 7) ? this.imageNumber : 1;
-	this = new Slide(this.reelNumber, newImageNumber);
 }
 
 Slide.prototype.newReel = function(reelNumber){

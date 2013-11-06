@@ -20,8 +20,12 @@ A user inserts reels into their Viewmaster and then uses the Viewmaster Narrativ
 - `add description`
 - `add event`
 - `add item`
-- `add <item> description`
 - `add <item> note`
+
+__Future commands__
+
+- `get map`
+
 
 ##Usage
 
@@ -52,8 +56,6 @@ A user inserts reels into their Viewmaster and then uses the Viewmaster Narrativ
 `add event`: adds an event to the location
 
 `add item`: adds an item to the location
-
-`add <item> description`: adds a description to the `<item>`
 
 `add <item> note`: adds a new note to the `<item>`
 
