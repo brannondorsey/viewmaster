@@ -5,7 +5,11 @@ function Slide(reelNumber, imageNumber){
 	this.logChanges = true;
 	this.reelNumber = reelNumber;
 	this.imageNumber = imageNumber;
-	var data = dataHand.loadSlideData(reelNumber, imageNumber);
+	this.load();
+}
+
+Slide.prototype.load = function(){
+	var data = dataHand.loadSlideData(this.reelNumber, this.imageNumber);
 	this.description = data.description;
 	this.events = data.events;
 	this.items = data.items;
@@ -71,7 +75,7 @@ Slide.prototype.saveDescription = function(){
 		this.reload();
 		this.description = ""; //clear the description
 		if(this.logChanges) console.log("Descpription saved");
-	}console.log("Error saving description");
+	}else console.log("Error saving description");
 }
 
 Slide.prototype.saveEvent = function(){
@@ -80,10 +84,12 @@ Slide.prototype.saveEvent = function(){
 		this.reload();
 		this.newEvent = {}; //clear this.newEvent
 		if(this.logChanges) console.log("Event saved");
-	}console.log("Error saving event");
+	}else console.log("Error saving event");
 }
 
 Slide.prototype.saveItem = function(bFromSaveNoteFunction){
+	// console.log("reelNumber: " + this.reelNumber);
+	// console.log("imageNumber: " + this.imageNumber);
 	if(dataHand.saveItem(this.reelNumber, this.imageNumber, this.newItem)){
 		this.reload();
 		this.newItem = {}; //clear this.newEvent
@@ -93,7 +99,7 @@ Slide.prototype.saveItem = function(bFromSaveNoteFunction){
 			else output = "Item saved. You should add some notes too: 'add <item> note'"
 			console.log(output);
 		}
-	}console.log("Error saving item");
+	}else console.log("Error saving item");
 }
 
 Slide.prototype.saveNote = function(){
@@ -101,7 +107,14 @@ Slide.prototype.saveNote = function(){
 }
 
 Slide.prototype.reload = function(){
-	this = new Slide(this.realNumber, this.imageNumber);
+	this.load(this.realNumber, this.imageNumber);
+}
+
+//------------------------------------------------------------------
+//Functions for printing to the console
+
+Slide.prototype.printDescription = function(){
+	console.log(this.description);
 }
 
 //------------------------------------------------------------------

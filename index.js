@@ -1,6 +1,7 @@
 var program = require('commander');
 var fs = require('fs-extra');
 var Slide = require('./classes/Slide');
+//var keypress = require('keypress');
 
 //---------------------------------------------------------
 var slide = new Slide(1, 1);
@@ -8,8 +9,12 @@ var commands = fs.readJSONSync("commands.json");
 
 var promptIndex = 0;
 var promptMaxes = getPromptMaxes(commands);
+var currentParentCommand;
+var currentPromptMax;
+
 var defaultPrompt = "> ";
 
+//---------------------------------------------------------
 
 prompt(defaultPrompt);
 
@@ -17,8 +22,9 @@ prompt(defaultPrompt);
 
 function prompt(str){
 	program.prompt(str, function(response){
-		var nextString = parse(response);
-		prompt(nextString);
+		response = response.trim();
+		var nextPromptStr = parse(response);
+		prompt(nextPromptStr + "\n\r" + defaultPrompt);
 	});
 }
 
@@ -27,10 +33,14 @@ function parse(response){
 
 	var output = defaultPrompt;
 	var passes = false;
-	var responseToPrompt = false; //COME BACK AND USE THIS
-
+	var finishedPrompt = false;
+	var command;
+	//console.log();
+	//check if the response is a main command
 	for(var i = 0; i < commands.length; i++){
-		var command = commands[i];
+		command = commands[i];
+		//console.log(command);
+		//console.log(command.usage);
 		if(command.usage == response){
 			passes = i;
 			break;
@@ -42,48 +52,73 @@ function parse(response){
 			}
 		}
 	}
-
-	//if the input matched a usage or a regular expression
-	if(passes !== false){
+	
+	//if the response was a main command and there
+	//are currently no sub prompts being answered
+	if(passes !== false &&
+	   promptIndex == 0){
 		command = commands[i];
 
 		//if there are prompts
 		if(typeof command.prompts !== 'undefined'){
 
-			var maxPrompts = promptMaxes[command.usage];
-			
-			//if there are more prompts left
-			if(promptIndex < maxPrompts){
-				var prompt = command.prompts[promptIndex];
-				var regex = RegExp(prompt.regex, 'i');
-				if(regex.test(response)){
+			currentPromptMax = promptMaxes[command.usage] + 1;
+			currentParentCommand = command;
 
-					//if this is the first prompt
-					if(promptIndex == 0){
-						promptIndex++;
-						output = prompt.prompt;
-					}else{
-						slide[prompt.function]();
-						console.log("I should have just called the function");
-						output = command.prompts[promptIndex].prompt;
-						promptIndex++;
-					}
-				}else output = prompt.error;
-			}else{ //if all prompts have been completed
-
-				if(command.prompt.class == 'slide'){
-
-					//call the function
-					slide[command.function]();
-				}
-				promptIndex = 0;
-			}
-		}else{ //if there are no prompts
+		}else{ //if there are no prompts execute the command
+			console.log("I got in here");
 			if(command.class == 'slide'){
-				slide[command.function]();
+
+				slide[command.function](response);
 			}
 		}
-	}else output = "Command not found. Type 'help' for a list of valid commands."
+	}
+
+	// console.log("current prompt max " + currentPromptMax);
+	//console.log("current prompt index " + promptIndex);
+	if(currentPromptMax != 0 &&
+	   promptIndex <= currentPromptMax){
+
+		//if there are still prompts left
+		if(promptIndex < currentPromptMax){
+
+			var prompt = currentParentCommand.prompts[promptIndex];
+			var previousPrompt = currentParentCommand.prompts[promptIndex-1];
+
+			//if this is the first prompt
+			if(promptIndex == 0){
+				promptIndex++;
+				output = prompt.prompt;
+			}else{
+				var regex = RegExp(previousPrompt.regex, 'i');
+				// console.log(previousPrompt);
+				//test to make sure that the response fulfills the previous prompts regex
+				if(regex.test(response)){
+					//console.log("got in 3");
+					//if it does then execute the function assosciated with the last prompt
+					slide[previousPrompt.function](response);
+					promptIndex++;
+					if(promptIndex != currentPromptMax){ //if there are still more prompts...
+						output = prompt.prompt;
+					}else{ //if all prompts have been completed
+						console.log("It is my understanding that the prompts are complete");
+						if(currentParentCommand.class == 'slide'){
+
+							//call the function
+							slide[currentParentCommand.function](response);
+						}
+						promptIndex = 0;
+						currentPromptMax = 0;
+						finishedPrompt = true;
+					}	
+				}else output = previousPrompt.error;
+			}
+		}
+	}
+
+	if(passes === false &&
+	   promptIndex == 0 &&
+	   !finishedPrompt) output = "Command not found. Type 'help' for a list of valid commands."
 	
 	return output;
 }

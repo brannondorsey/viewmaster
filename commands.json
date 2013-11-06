@@ -36,6 +36,7 @@
 	{
 		"usage": "get history",
 		"description": "shows you all of the events associated with the location that you are viewing in chronological order",
+		"function": "getHistory",
 		"class": "slide"
 	},
 	{
