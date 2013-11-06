@@ -1,8 +1,11 @@
+var DataHandler = require("classes/DataHandler");
+var dataHand = new DataHandler(); //keep dataHand private
+
 function Slide(reelNumber, imageNumber){
 	this.logChanges = true;
 	this.reelNumber = reelNumber;
 	this.imageNumber = imageNumber;
-	var data = DataHandler.loadData(reelNumber, imageNumber);
+	var data = dataHand.loadSlideData(reelNumber, imageNumber);
 	this.description = data.description;
 	this.events = data.events;
 	this.items = data.items;
