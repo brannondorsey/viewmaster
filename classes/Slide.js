@@ -74,7 +74,6 @@ Slide.prototype.addItemNote = function(itemName, note){
 Slide.prototype.saveDescription = function(){
 	if(dataHand.saveDescription(this.reelNumber, this.imageNumber, this.description)){
 		this.reload();
-		this.description = ""; //clear the description
 		if(this.logChanges) console.log("Descpription saved");
 	}else console.log("Error saving description");
 }
@@ -88,23 +87,20 @@ Slide.prototype.saveEvent = function(){
 	}else console.log("Error saving event");
 }
 
-Slide.prototype.saveItem = function(bFromSaveNoteFunction){
+Slide.prototype.saveItem = function(){
 	// console.log("reelNumber: " + this.reelNumber);
 	// console.log("imageNumber: " + this.imageNumber);
 	if(dataHand.saveItem(this.reelNumber, this.imageNumber, this.newItem)){
 		this.reload();
 		this.newItem = {}; //clear this.newEvent
 		if(this.logChanges){
-			var output;
-			if(bFromSaveNoteFunction === true) output = "Note saved";
-			else output = "Item saved. You should add some notes too: 'add <item> note'"
-			console.log(output);
+			var output = "Item saved. You should add some notes too: 'add <item> note'"
 		}
 	}else console.log("Error saving item");
 }
 
 Slide.prototype.saveNote = function(){
-	this.saveItem(true); //just resave the item because its notes property was updated
+	
 }
 
 Slide.prototype.reload = function(){
@@ -144,12 +140,14 @@ Slide.prototype.printEventList = function(){
 	} 
 }
 
-Slide.prototype.printEvent = function(eventName){
-	var event = this.getEvent(eventName);
-	console.log();
-	console.log(event.name + ', ' + event.season + ' ' + event.year);
-	console.log(event.description);
-	console.log();
+Slide.prototype.printEvent = function(response, hasParameter){
+	var event = this.getEvent(response, hasParameter);
+	if(event){
+		console.log();
+		console.log(event.name + ', ' + event.season + ' ' + event.year);
+		console.log(event.description);
+		console.log();
+	}else return false;
 }
 
 Slide.prototype.printItemList = function(){
@@ -165,6 +163,37 @@ Slide.prototype.printItemList = function(){
 	} 
 }
 
+Slide.prototype.printItemDescription = function(response, hasParameter){
+	if(hasParameter){
+		var parameter = response;
+		var item = this._getItemByName(parameter);
+		if(item){
+			console.log(item.description);
+		}else console.log('This item doesn\'t exist. Type \'get item list\' to view available items.');
+	}else return false;
+}
+
+Slide.prototype.printItemNotes = function(response, hasParameter){
+	if(hasParameter){
+		var parameter = response;
+		var item = this._getItemByName(parameter);
+		if(item){
+			var numNotes = item.notes.length;
+			if(numNotes > 0){
+				console.log();
+				for(var i = 0; i < numNotes; i++){
+					var note = item.notes[i];
+					console.log(note);
+					console.log(note);
+				}
+				console.log();
+			}else{
+				console.log('This item doesn\'t have any notes. Add one using \'add <item> note\'.');
+			}
+		}else console.log('This item doesn\'t exist. Type \'get item list\' to view available items.');
+	}else return false;
+}
+
 //------------------------------------------------------------------
 
 Slide.prototype.getHistory = function(){
@@ -177,15 +206,15 @@ Slide.prototype.getHistory = function(){
 }
 
 //returns an event object on success and false on failure
-Slide.prototype.getEvent = function(name){
-	var index;
-	if(typeof name !== 'undefined'){
-		return this._getEventByName(name);
-	}else{
+Slide.prototype.getEvent = function(response, hasParameter){
+	if(hasParameter){
+		var event = this._getEventByName(response);
+		if(event) return event;
+	}else if(this.events.length > 0){
 		var random = Math.floor(Math.random() * this.events.length);
-		console.log(this.events);
 		return this.events[random];
 	}
+	return false;
 }
 
 Slide.prototype.getEventList = function(){
@@ -196,9 +225,9 @@ Slide.prototype.getEventList = function(){
 	return eventNames.reverse();
 }
 
-Slide.prototype.advance = function(imageNumber){
-	if(typeof imageNumber !== 'undefined') {
-		imageNumber = 2; //come back and take this out
+Slide.prototype.advance = function(response, hasParameter){
+	if(hasParameter) {
+		var imageNumber = parseInt(response);
 		this.load(this.reelNumber, imageNumber);
 	}else{
 		var newImageNumber = (this.imageNumber < 7) ? this.imageNumber : 1;
@@ -214,7 +243,15 @@ Slide.prototype.newReel = function(reelNumber){
 //returns event obj if one is found and false if one is not
 Slide.prototype._getEventByName = function(name){
 	for(var i = 0; i < this.events.length; i++){
-		if(this.events[i].name == name) return this.events[i];
+		if(this.events[i].name.toLowerCase() == name.toLowerCase()) return this.events[i];
+	}
+	return false;
+}
+
+//returns event obj if one is found and false if one is not
+Slide.prototype._getItemByName = function(name){
+	for(var i = 0; i < this.items.length; i++){
+		if(this.items[i].name.toLowerCase() == name.toLowerCase()) return this.items[i];
 	}
 	return false;
 }

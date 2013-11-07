@@ -25,7 +25,7 @@ function prompt(str){
 	program.prompt(str, function(response){
 		response = response.trim();
 		var nextPromptStr = parse(response);
-		prompt(nextPromptStr + "\n\r" + defaultPrompt);
+		prompt(nextPromptStr + "\n" + defaultPrompt);
 	});
 }
 
@@ -67,11 +67,27 @@ function parse(response){
 			currentParentCommand = command;
 
 		}else{ //if there are no prompts execute the command
-			if(command.class == 'slide'){
-				slide[command.function](response);
-			}else if(command.class == 'global'){
-				global[command.function](response);
+
+			var required = parseParameter(command.usage, response, '<>');
+			var optional = parseParameter(command.usage, response, '[]');
+			var hasParameter = false;
+			var success = true;
+			
+			if(required !== false){
+				response = required
+				hasParameter = true;
+			}else if(optional !== false){
+				response = optional;
+				hasParameter = true;
 			}
+
+			if(command.class == 'slide'){
+				success = slide[command.function](response, hasParameter);
+			}else if(command.class == 'global'){
+				success = global[command.function](response, hasParameter);
+			}
+
+			if(success === false) console.log(command.error);
 		}
 	}
 
@@ -118,15 +134,51 @@ function parse(response){
 
 	if(passes === false &&
 	   promptIndex == 0 &&
-	   !finishedPrompt) output = "Command not found. Type 'help' for a list of valid commands."
+	   !finishedPrompt &&
+	   response != '') output = "Command not found. Type 'help' for a list of valid commands."
 	
 	return output;
 }
+
+//returns the optional or required parameter if one exists
+//and false if one does not
+function parseParameter(usage, response, characters){
+	var openingChar = characters.charAt(0);
+	var closingChar = characters.charAt(1);
+	var openIndex = usage.indexOf(openingChar);
+	var closeIndex = usage.indexOf(closingChar);
+	// var required = true;
+	// if(characters = '[]'){
+	// 	required = false;
+	// }
+	// console.log("openIndex: " + openIndex);
+	// console.log("closeIndex: " + closeIndex);
+	if(openIndex != -1 &&
+	   closeIndex != -1){
+		var removal = [];
+		removal[0] = usage.substring(0, openIndex - 1);
+		removal[1] = usage.substring(closeIndex + 1);
+
+		var parameter
+		// //if a parameter was provided
+		// if(parameter != removal[0]){
+		parameter = response.replace(removal[0], '');
+		// console.log('The parameter after front manipulation is: ' + parameter);
+		parameter = parameter.replace(removal[1], '');
+		// console.log('The parameter after all manipulation is: ' + parameter);
+		if(parameter != '') return parameter.trim();
+		//}
+	}
+	return false;
+}
+
 
 function printHelp(){
 	var charBeforeDescription = 25;
 	var padding = getSpaces(charBeforeDescription - "usage:".length);
 
+	console.log();
+	console.log('<name> denotes required parameter while [name] denotes an optional parameter.');
 	console.log();
  	console.log("usage:" + padding + "description:");
 	for(var i = 0; i < commands.length; i++){

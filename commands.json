@@ -35,7 +35,7 @@
 	},
 	{
 		"usage": "get history",
-		"description": "shows you all of the events associated with the location that you are viewing in chronological order",
+		"description": "shows you all of the events associated with the location that you are viewing",
 		"function": "printHistory",
 		"class": "slide"
 	},
@@ -48,7 +48,8 @@
 	{
 		"usage": "get event [name]",
 		"regex": "get event[0-9a-zA-Z ]*",
-		"description": "prints the event that matches [name] if it was provided or a random event if it was not",
+		"description": "prints the event that matches [name] or a random event if [name] wasn't provided",
+		"error": "an invalid event name was provided",
 		"function": "printEvent",
 		"class": "slide"
 	},
@@ -63,7 +64,7 @@
 		"regex": "get [0-9a-zA-Z ]{2,25} description",
 		"error": "You must provide a valid item name containing between 2-25 letters, numbers, and spaces (i.e. 'get shovel description')",
 		"description": "prints a description of the item",
-		"function": "getItemDescription",
+		"function": "printItemDescription",
 		"class": "slide"
 	},
 	{
@@ -71,7 +72,7 @@
 		"regex": "get [0-9a-zA-Z_ ]{2,25} notes",
 		"error": "You must provide a valid item name containing between 2-25 letters, numbers, and spaces (i.e. 'get shovel notes')",
 		"description": "prints all of the notes associated with the <item>",
-		"function": "getItemNotes",
+		"function": "printItemNotes",
 		"class": "slide"
 	},
 	{
