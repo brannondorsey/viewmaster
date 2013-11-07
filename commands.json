@@ -3,7 +3,7 @@
 		"usage": "help",
 		"description": "prints a list of all commands and descriptions of their usage",
 		"function": "printHelp",
-		"class": "commands"
+		"class": "global"
 	},
 	{
 		"usage": "using <reelNumber>",
@@ -16,7 +16,7 @@
 	{
 		"usage": "next",
 		"description": "notifies the program that you have advanced the reel once",
-		"function": "next",
+		"function": "advance",
 		"class": "slide"
 	},
 	{
@@ -36,23 +36,26 @@
 	{
 		"usage": "get history",
 		"description": "shows you all of the events associated with the location that you are viewing in chronological order",
-		"function": "getHistory",
+		"function": "printHistory",
 		"class": "slide"
 	},
 	{
 		"usage": "get event list",
 		"description": "prints a list of all event names",
+		"function": "printEventList",
 		"class": "slide"
 	},
 	{
 		"usage": "get event [name]",
 		"regex": "get event[0-9a-zA-Z ]*",
 		"description": "prints the event that matches [name] if it was provided or a random event if it was not",
+		"function": "printEvent",
 		"class": "slide"
 	},
 	{
 		"usage": "get item list",
 		"description": "prints a list of all item names",
+		"function": "printItemList",
 		"class": "slide"
 	},
 	{
@@ -60,6 +63,7 @@
 		"regex": "get [0-9a-zA-Z ]{2,25} description",
 		"error": "You must provide a valid item name containing between 2-25 letters, numbers, and spaces (i.e. 'get shovel description')",
 		"description": "prints a description of the item",
+		"function": "getItemDescription",
 		"class": "slide"
 	},
 	{
@@ -67,6 +71,7 @@
 		"regex": "get [0-9a-zA-Z_ ]{2,25} notes",
 		"error": "You must provide a valid item name containing between 2-25 letters, numbers, and spaces (i.e. 'get shovel notes')",
 		"description": "prints all of the notes associated with the <item>",
+		"function": "getItemNotes",
 		"class": "slide"
 	},
 	{
@@ -89,7 +94,7 @@
 		"description": "adds an event to the location",
 		"prompts": [
 			{
-				"prompt": "What is the event called?",
+				"prompt": "What was the event called?",
 				"regex": "[a-zA-Z0-9 ]{2,25}",
 				"error": "Event names must must be between 2-25 characters and may contain only letters, digits, and spaces",
 				"function" : "addEventName",

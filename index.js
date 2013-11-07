@@ -2,6 +2,7 @@ var program = require('commander');
 var fs = require('fs-extra');
 var Slide = require('./classes/Slide');
 //var keypress = require('keypress');
+global['printHelp'] = printHelp;
 
 //---------------------------------------------------------
 var slide = new Slide(1, 1);
@@ -31,7 +32,7 @@ function prompt(str){
 //returns the string for the next prompt
 function parse(response){
 
-	var output = defaultPrompt;
+	var output = '';
 	var passes = false;
 	var finishedPrompt = false;
 	var command;
@@ -66,10 +67,10 @@ function parse(response){
 			currentParentCommand = command;
 
 		}else{ //if there are no prompts execute the command
-			console.log("I got in here");
 			if(command.class == 'slide'){
-
 				slide[command.function](response);
+			}else if(command.class == 'global'){
+				global[command.function](response);
 			}
 		}
 	}
@@ -101,7 +102,6 @@ function parse(response){
 					if(promptIndex != currentPromptMax){ //if there are still more prompts...
 						output = prompt.prompt;
 					}else{ //if all prompts have been completed
-						console.log("It is my understanding that the prompts are complete");
 						if(currentParentCommand.class == 'slide'){
 
 							//call the function
@@ -123,6 +123,20 @@ function parse(response){
 	return output;
 }
 
+function printHelp(){
+	var charBeforeDescription = 25;
+	var padding = getSpaces(charBeforeDescription - "usage:".length);
+
+	console.log();
+ 	console.log("usage:" + padding + "description:");
+	for(var i = 0; i < commands.length; i++){
+		var command = commands[i];
+		var paddingLength = charBeforeDescription - command.usage.length;
+		padding = getSpaces(paddingLength);
+		console.log(command.usage + padding + command.description);
+	}
+}
+
 //returns an assoc array of all commands that require further prompts
 //with their usage as key and the number of prompts as the value
 function getPromptMaxes(commands){
@@ -134,4 +148,12 @@ function getPromptMaxes(commands){
 		}
 	}
 	return promptMaxes;
+}
+
+function getSpaces(numSpaces){
+	var padding = '';
+	for(var j = 0; j < numSpaces; j++){
+		padding += ' ';
+	}
+	return padding;
 }

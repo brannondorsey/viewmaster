@@ -25,7 +25,7 @@ DataHandler.prototype.saveDescription = function(reelNumber, imageNumber, descri
 	var slideObj = this.loadSlideData(reelNumber, imageNumber);
 	if(slideObj){
 		slideObj.description = description;
-		fs.outputJSONSync(this._getPath(reelNumber, imageNumber) + ".json");
+		fs.outputJSONSync(this._getPath(reelNumber, imageNumber) + ".json", slideObj);
 		return true;
 	}else return false;
 }
@@ -34,8 +34,8 @@ DataHandler.prototype.saveDescription = function(reelNumber, imageNumber, descri
 DataHandler.prototype.saveEvent = function(reelNumber, imageNumber, event){
 	var slideObj = this.loadSlideData(reelNumber, imageNumber);
 	if(slideObj){
-		slideObj.events.push(events);
-		fs.outputJSONSync(this._getPath(reelNumber, imageNumber) + ".json");
+		slideObj.events.push(event);
+		fs.outputJSONSync(this._getPath(reelNumber, imageNumber) + ".json", slideObj);
 		return true;
 	}else return false;
 }

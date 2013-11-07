@@ -8,8 +8,10 @@ function Slide(reelNumber, imageNumber){
 	this.load();
 }
 
-Slide.prototype.load = function(){
-	var data = dataHand.loadSlideData(this.reelNumber, this.imageNumber);
+Slide.prototype.load = function(reelNumber, imageNumber){
+	if(reelNumber === undefined) reelNumber = this.reelNumber;
+	if(imageNumber === undefined) imageNumber = this.imageNumber;
+	var data = dataHand.loadSlideData(reelNumber, imageNumber);
 	this.description = data.description;
 	this.events = data.events;
 	this.items = data.items;
@@ -49,7 +51,6 @@ Slide.prototype.addEventDescription = function(description){
 
 Slide.prototype.addItemName = function(name){
 	this.newItem.name = name;
-	console.log("I added an item name!");
 }
 
 Slide.prototype.addItemDescription = function(description){
@@ -95,7 +96,7 @@ Slide.prototype.saveItem = function(bFromSaveNoteFunction){
 		this.newItem = {}; //clear this.newEvent
 		if(this.logChanges){
 			var output;
-			if(bFromSaveNoteFunction) output = "Note saved";
+			if(bFromSaveNoteFunction === true) output = "Note saved";
 			else output = "Item saved. You should add some notes too: 'add <item> note'"
 			console.log(output);
 		}
@@ -117,6 +118,53 @@ Slide.prototype.printDescription = function(){
 	console.log(this.description);
 }
 
+Slide.prototype.printHistory = function(){
+	var events = this.getHistory();
+	if(events.length > 0){
+		console.log();
+		for(var i = 0; i < events.length; i++){
+			var event = events[i];
+			console.log(event.name + ', ' + event.season + ' ' + event.year);
+			console.log(event.description);
+			console.log();
+		}
+	}else console.log("There are no events assosciated with this location yet.");
+}
+
+Slide.prototype.printEventList = function(){
+	console.log();
+	if(this.events.length > 0){
+		for(var i = 0; i < this.events.length; i++){
+			var event = this.events[i];
+			console.log(event.name);
+		}
+		console.log();
+	}else{
+		console.log("There are no events assosciated with this location yet.");
+	} 
+}
+
+Slide.prototype.printEvent = function(eventName){
+	var event = this.getEvent(eventName);
+	console.log();
+	console.log(event.name + ', ' + event.season + ' ' + event.year);
+	console.log(event.description);
+	console.log();
+}
+
+Slide.prototype.printItemList = function(){
+	console.log();
+	if(this.items.length > 0){
+		for(var i = 0; i < this.items.length; i++){
+			var item = this.items[i];
+			console.log(item.name);
+		}
+		console.log();
+	}else{
+		console.log("No items have been added to this location yet");
+	} 
+}
+
 //------------------------------------------------------------------
 
 Slide.prototype.getHistory = function(){
@@ -131,10 +179,11 @@ Slide.prototype.getHistory = function(){
 //returns an event object on success and false on failure
 Slide.prototype.getEvent = function(name){
 	var index;
-	if(typeof name !== 'undefine'){
+	if(typeof name !== 'undefined'){
 		return this._getEventByName(name);
 	}else{
 		var random = Math.floor(Math.random() * this.events.length);
+		console.log(this.events);
 		return this.events[random];
 	}
 }
@@ -149,15 +198,17 @@ Slide.prototype.getEventList = function(){
 
 Slide.prototype.advance = function(imageNumber){
 	if(typeof imageNumber !== 'undefined') {
-		this = new Slide(this.reelNumber, imageNumber);
+		imageNumber = 2; //come back and take this out
+		this.load(this.reelNumber, imageNumber);
 	}else{
 		var newImageNumber = (this.imageNumber < 7) ? this.imageNumber : 1;
-		this = new Slide(this.reelNumber, newImageNumber);
+		this.load(this.reelNumber, newImageNumber);
 	}
+	console.log("slide advanced");
 }
 
 Slide.prototype.newReel = function(reelNumber){
-	this = new Slide(reelNumber, 1);
+	this.load(reelNumber, 1);
 }
 
 //returns event obj if one is found and false if one is not
