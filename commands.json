@@ -29,13 +29,13 @@
 	},
 	{
 		"usage": "get description",
-		"description": "shows you the current description of the location",
+		"description": "prints the current description of the location",
 		"function": "printDescription",
 		"class": "slide"
 	},
 	{
 		"usage": "get history",
-		"description": "shows you all of the events associated with the location",
+		"description": "prints all of the events associated with the location",
 		"function": "printHistory",
 		"class": "slide"
 	},
@@ -48,7 +48,7 @@
 	{
 		"usage": "get event [name]",
 		"regex": "get event[0-9a-zA-Z ]*",
-		"description": "prints specified event or a random event if [name] wasn't given",
+		"description": "prints [name] event or random event if [name] not given", 
 		"error": "an invalid event name was provided",
 		"function": "printEvent",
 		"class": "slide"
