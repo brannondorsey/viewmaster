@@ -60,35 +60,56 @@ function parse(response){
 	   promptIndex == 0){
 		command = commands[i];
 
+		var success = true;
+
+		var required = parseParameter(command.usage, response, '<>');
+		var optional = parseParameter(command.usage, response, '[]');
+		var hasParameter = false;
+		
+		if(required !== false){
+			response = required
+			hasParameter = true;
+		}else if(optional !== false){
+			response = optional;
+			hasParameter = true;
+		}
+
 		//if there are prompts
 		if(typeof command.prompts !== 'undefined'){
 
 			currentPromptMax = promptMaxes[command.usage] + 1;
 			currentParentCommand = command;
+			if(command.preFunction !== undefined){
+				console.log("I did get in here");
+				if(command.class == 'slide'){
+					console.log("I am trying the function");
+					success = slide[command.preFunction](response, hasParameter);
+				}
+			}
 
 		}else{ //if there are no prompts execute the command
 
-			var required = parseParameter(command.usage, response, '<>');
-			var optional = parseParameter(command.usage, response, '[]');
-			var hasParameter = false;
-			var success = true;
+			// var required = parseParameter(command.usage, response, '<>');
+			// var optional = parseParameter(command.usage, response, '[]');
+			// var hasParameter = false;
 			
-			if(required !== false){
-				response = required
-				hasParameter = true;
-			}else if(optional !== false){
-				response = optional;
-				hasParameter = true;
-			}
-
+			// if(required !== false){
+			// 	response = required
+			// 	hasParameter = true;
+			// }else if(optional !== false){
+			// 	response = optional;
+			// 	hasParameter = true;
+			// }
+			var fn = command.function;
 			if(command.class == 'slide'){
-				success = slide[command.function](response, hasParameter);
+				success = slide[fn](response, hasParameter);
+				console.log(fn);
+				console.log(success);
 			}else if(command.class == 'global'){
-				success = global[command.function](response, hasParameter);
+				success = global[fn](response, hasParameter);
 			}
-
-			if(success === false) console.log(command.error);
 		}
+		if(success === false) console.log(command.error);
 	}
 
 	// console.log("current prompt max " + currentPromptMax);

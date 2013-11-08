@@ -41,12 +41,15 @@ DataHandler.prototype.saveEvent = function(reelNumber, imageNumber, event){
 }
 
 //bool reflecting success
-DataHandler.prototype.saveItem = function(reelNumber, imageNumber, item){
+DataHandler.prototype.saveItem = function(reelNumber, imageNumber, item, itemParamIsArray){
 	var slideObj = this.loadSlideData(reelNumber, imageNumber);
 	if(slideObj){
-		slideObj.items.push(item);
+		//if 'item' is an array instead of an item that needs to be pushed to the slideObj.items array
+		if(itemParamIsArray){
+			slideObj.items = item;
+		}
+		else slideObj.items.push(item);
 		fs.outputJSONSync(this._getPath(reelNumber, imageNumber) + ".json", slideObj);
-		console.log("I just saved the file as: ", slideObj);
 		return true;
 	}else return false;
 }

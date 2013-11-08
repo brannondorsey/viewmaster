@@ -18,6 +18,7 @@ Slide.prototype.load = function(reelNumber, imageNumber){
 	this.newEvent = {};
 	this.newItem = {};
 	this.newItem.notes = [];
+	this.selectedItem;
 }
 
 //------------------------------------------------------------------
@@ -47,7 +48,17 @@ Slide.prototype.addEventDescription = function(description){
 }
 
 //------------------------------------------------------------------
-//Functions for updating this.newItem
+//Functions for updating this.newItem or this.selectedItem
+
+//'add <item> note' preFunction
+Slide.prototype.selectItem = function(response, hasParameter){
+	if(hasParameter){
+		var item = this._getItemByName(response);
+		if(item){
+			this.selectedItem = item;
+		}else console.log('This item doesn\'t exist. Type \'get item list\' to view available items.');
+	}else return false;
+}
 
 Slide.prototype.addItemName = function(name){
 	this.newItem.name = name;
@@ -57,15 +68,8 @@ Slide.prototype.addItemDescription = function(description){
 	this.newItem.description = description;
 }
 
-//returns true on success and false on failure
-Slide.prototype.addItemNote = function(itemName, note){
-	for(var i = 0; i < this.items.length; i++){
-		if(this.items[i].name == itemName){
-			this.items[i].notes.push(note);
-			return true;
-		}
-	}
-	return false;
+Slide.prototype.addItemNote = function(note){
+	this.selectedItem.notes.push(note);
 }
 
 //------------------------------------------------------------------
@@ -99,8 +103,22 @@ Slide.prototype.saveItem = function(){
 	}else console.log("Error saving item");
 }
 
-Slide.prototype.saveNote = function(){
-	
+Slide.prototype.saveItemNote = function(){
+	var selectedItemName = this.selectedItem.name.toLowerCase();
+	var index;
+	for(var i = 0; i < this.items.length; i++){
+		var item = this.items[i];
+		if(item.name.toLowerCase() == selectedItemName) index = i;
+	}
+	this.items[index] = this.selectedItem;
+	if(dataHand.saveItem(this.reelNumber, this.imageNumber, this.items, true)){
+		this.reload();
+		this.newItem = {}; //clear this.newEvent
+		if(this.logChanges){
+			var output = "Item saved. You should add some notes too: 'add <item> note'.";
+		}
+	}else console.log("Error saving item");	
+	this.selectedItem = {};
 }
 
 Slide.prototype.reload = function(){
@@ -184,7 +202,7 @@ Slide.prototype.printItemNotes = function(response, hasParameter){
 				for(var i = 0; i < numNotes; i++){
 					var note = item.notes[i];
 					console.log(note);
-					console.log(note);
+					console.log();
 				}
 				console.log();
 			}else{

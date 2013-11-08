@@ -161,7 +161,8 @@
 				"function": "addItemNote"
 			}
 		],
-		"function": "saveNote",
+		"preFunction": "selectItem",
+		"function": "saveItemNote",
 		"class": "slide"
 	}
 ]
