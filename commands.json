@@ -1,7 +1,7 @@
 [
 	{
 		"usage": "help",
-		"description": "prints a list of all commands and descriptions of their usage",
+		"description": "prints a list of all commands and their usage",
 		"function": "printHelp",
 		"class": "global"
 	},
@@ -20,22 +20,22 @@
 		"class": "slide"
 	},
 	{
-		"usage": "go to <imageNumber>",
+		"usage": "go to <slideNumber>",
 		"regex": "go to [0-7]",
 		"error": "an image number between 1 and 7 must be provided (i.e. 'go to 7')",
-		"description": "notifies the program that you are viewing the image at <imageNumber>",
+		"description": "instructs the program to use the slide at <slideNumber>",
 		"function": "advance",
 		"class": "slide"
 	},
 	{
 		"usage": "get description",
-		"description": "shows you the current description of the location that you are viewing",
+		"description": "shows you the current description of the location",
 		"function": "printDescription",
 		"class": "slide"
 	},
 	{
 		"usage": "get history",
-		"description": "shows you all of the events associated with the location that you are viewing",
+		"description": "shows you all of the events associated with the location",
 		"function": "printHistory",
 		"class": "slide"
 	},
@@ -48,7 +48,7 @@
 	{
 		"usage": "get event [name]",
 		"regex": "get event[0-9a-zA-Z ]*",
-		"description": "prints the event that matches [name] or a random event if [name] wasn't provided",
+		"description": "prints specified event or a random event if [name] wasn't given",
 		"error": "an invalid event name was provided",
 		"function": "printEvent",
 		"class": "slide"
