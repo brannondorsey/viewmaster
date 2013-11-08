@@ -1,0 +1,54 @@
+{
+  "description": "A small cove on the coast",
+  "events": [
+    {
+      "name": "Hall Canyon",
+      "year": "1976",
+      "season": "Fall",
+      "description": "This is where you say what actually happened."
+    },
+    {
+      "name": "Moonlight Walk",
+      "year": "1960",
+      "season": "Winter",
+      "description": "A walk in the night that lasted shorter than most."
+    },
+    {
+      "name": "Surf Nationals 84",
+      "year": "1984",
+      "season": "Summer",
+      "description": "The 1984 National Surf Championships occured at this location. The event lasted three mostly rainy days."
+    }
+  ],
+  "items": [
+    {
+      "name": "Old Car",
+      "description": "An old rusty car that has layed in a ditch for as long as anyone can remember",
+      "notes": [
+        "The old car looks to be an early Mercedes",
+        "The carcus of a small animal lies in the backseat"
+      ]
+    },
+    {
+      "notes": [],
+      "name": "Surf Board",
+      "description": "A long white surf board with a red stripe down the middle."
+    },
+    {
+      "name": "Shovel",
+      "description": "A very old shovel",
+      "notes": [
+        "oijsdfoijsdofijsodifjsodijfosdijf",
+        "oaisjdfoijsdfoijiiiiiiiiiiiiii",
+        "test test test test tset",
+        "oijsdfijsdofijsdoifjsdfhdhhhhhhhh",
+        "isodfiosuiiisidffdfdfjsdofijsidjfoijsdfjjjsdffdfsfdf"
+      ]
+    },
+    {
+      "notes": [],
+      "name": "Super item",
+      "description": "Its a really really nice item"
+    }
+  ]
+}
