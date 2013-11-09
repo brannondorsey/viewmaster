@@ -55,6 +55,12 @@ DataHandler.prototype.saveItem = function(reelNumber, imageNumber, item, itemPar
 }
 
 //------------------------------------------------------------------
+
+DataHandler.prototype.reelExists = function(reelNumber){
+	return fs.existsSync(this.dataPath + reelNumber.toString());
+}
+
+//------------------------------------------------------------------
 //Private functions
 
 DataHandler.prototype._getPath = function(reelNumber, imageNumber){

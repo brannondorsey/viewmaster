@@ -1,7 +1,5 @@
-var program = require('commander');
 var fs = require('fs-extra');
 var Slide = require('./classes/Slide');
-//var keypress = require('keypress');
 global['printHelp'] = printHelp;
 
 //---------------------------------------------------------
@@ -22,11 +20,19 @@ prompt(defaultPrompt);
 //---------------------------------------------------------
 
 function prompt(str){
-	program.prompt(str, function(response){
-		response = response.trim();
+	onEnter(str, function(response){
 		var nextPromptStr = parse(response);
-		prompt(nextPromptStr + "\n" + defaultPrompt);
+		var output = (nextPromptStr != '') ? nextPromptStr + '\n' + defaultPrompt : defaultPrompt; 
+		prompt(output);
 	});
+}
+
+function onEnter(str, fn){
+	process.stdout.write(str);
+	process.stdin.setEncoding('utf8');
+	process.stdin.once('data', function(val){
+	  fn(val.trim());
+	}).resume();
 }
 
 //returns the string for the next prompt
@@ -80,31 +86,16 @@ function parse(response){
 			currentPromptMax = promptMaxes[command.usage] + 1;
 			currentParentCommand = command;
 			if(command.preFunction !== undefined){
-				console.log("I did get in here");
 				if(command.class == 'slide'){
-					console.log("I am trying the function");
 					success = slide[command.preFunction](response, hasParameter);
 				}
 			}
 
 		}else{ //if there are no prompts execute the command
 
-			// var required = parseParameter(command.usage, response, '<>');
-			// var optional = parseParameter(command.usage, response, '[]');
-			// var hasParameter = false;
-			
-			// if(required !== false){
-			// 	response = required
-			// 	hasParameter = true;
-			// }else if(optional !== false){
-			// 	response = optional;
-			// 	hasParameter = true;
-			// }
 			var fn = command.function;
 			if(command.class == 'slide'){
 				success = slide[fn](response, hasParameter);
-				console.log(fn);
-				console.log(success);
 			}else if(command.class == 'global'){
 				success = global[fn](response, hasParameter);
 			}
@@ -113,7 +104,7 @@ function parse(response){
 	}
 
 	// console.log("current prompt max " + currentPromptMax);
-	//console.log("current prompt index " + promptIndex);
+	// console.log("current prompt index " + promptIndex);
 	if(currentPromptMax != 0 &&
 	   promptIndex <= currentPromptMax){
 
@@ -156,7 +147,7 @@ function parse(response){
 	if(passes === false &&
 	   promptIndex == 0 &&
 	   !finishedPrompt &&
-	   response != '') output = "Command not found. Type 'help' for a list of valid commands."
+	   response != '') output = "Command not found. Type 'help' for a list of valid commands.";
 	
 	return output;
 }
@@ -208,6 +199,7 @@ function printHelp(){
 		padding = getSpaces(paddingLength);
 		console.log(command.usage + padding + command.description);
 	}
+	console.log();
 }
 
 //returns an assoc array of all commands that require further prompts

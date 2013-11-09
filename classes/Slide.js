@@ -9,6 +9,7 @@ function Slide(reelNumber, imageNumber){
 }
 
 Slide.prototype.load = function(reelNumber, imageNumber){
+	console.log("I loaded");
 	if(reelNumber === undefined) reelNumber = this.reelNumber;
 	if(imageNumber === undefined) imageNumber = this.imageNumber;
 	var data = dataHand.loadSlideData(reelNumber, imageNumber);
@@ -40,6 +41,8 @@ Slide.prototype.addEventYear = function(year){
 }
 
 Slide.prototype.addEventSeason = function(season){
+	season = season.toLowerCase();
+	season = season.charAt(0).toUpperCase() + season.slice(1);
 	this.newEvent.season = season;
 }
 
@@ -78,8 +81,8 @@ Slide.prototype.addItemNote = function(note){
 Slide.prototype.saveDescription = function(){
 	if(dataHand.saveDescription(this.reelNumber, this.imageNumber, this.description)){
 		this.reload();
-		if(this.logChanges) console.log("Descpription saved");
-	}else console.log("Error saving description");
+		if(this.logChanges) console.log("Descpription saved.");
+	}else console.log("Error saving description.");
 }
 
 Slide.prototype.saveEvent = function(){
@@ -87,8 +90,8 @@ Slide.prototype.saveEvent = function(){
 		//this.events.push(this.newEvent);
 		this.reload();
 		this.newEvent = {}; //clear this.newEvent
-		if(this.logChanges) console.log("Event saved");
-	}else console.log("Error saving event");
+		if(this.logChanges) console.log("Event saved.");
+	}else console.log("Error saving event.");
 }
 
 Slide.prototype.saveItem = function(){
@@ -98,7 +101,7 @@ Slide.prototype.saveItem = function(){
 		this.reload();
 		this.newItem = {}; //clear this.newEvent
 		if(this.logChanges){
-			var output = "Item saved. You should add some notes too: 'add <item> note'"
+			console.log("Item saved. You should add some notes too: 'add <item> note'.");
 		}
 	}else console.log("Error saving item");
 }
@@ -115,9 +118,9 @@ Slide.prototype.saveItemNote = function(){
 		this.reload();
 		this.newItem = {}; //clear this.newEvent
 		if(this.logChanges){
-			var output = "Item saved. You should add some notes too: 'add <item> note'.";
+			console.log("Item saved. You should add some notes too: 'add <item> note'.");
 		}
-	}else console.log("Error saving item");	
+	}else console.log("Error saving item.");	
 	this.selectedItem = {};
 }
 
@@ -142,7 +145,7 @@ Slide.prototype.printHistory = function(){
 			console.log(event.description);
 			console.log();
 		}
-	}else console.log("There are no events assosciated with this location yet.");
+	}else console.log('There are no events assosciated with this location yet.');
 }
 
 Slide.prototype.printEventList = function(){
@@ -205,9 +208,7 @@ Slide.prototype.printItemNotes = function(response, hasParameter){
 					console.log();
 				}
 				console.log();
-			}else{
-				console.log('This item doesn\'t have any notes. Add one using \'add <item> note\'.');
-			}
+			}else console.log('This item doesn\'t have any notes. Add one using \'add <item> note\'.');
 		}else console.log('This item doesn\'t exist. Type \'get item list\' to view available items.');
 	}else return false;
 }
@@ -248,14 +249,17 @@ Slide.prototype.advance = function(response, hasParameter){
 		var imageNumber = parseInt(response);
 		this.load(this.reelNumber, imageNumber);
 	}else{
-		var newImageNumber = (this.imageNumber < 7) ? this.imageNumber : 1;
+		var newImageNumber = (this.imageNumber < 7) ? this.imageNumber + 1 : 1;
 		this.load(this.reelNumber, newImageNumber);
 	}
-	console.log("slide advanced");
+	if(this.logChanges)console.log("Slide advanced.");
 }
 
 Slide.prototype.newReel = function(reelNumber){
-	this.load(reelNumber, 1);
+	if(dataHand.reelExists(reelNumber)){
+		this.load(reelNumber, 1);
+		console.log('Reel loaded.');
+	}else console.log('Reel not found. Are you sure that you entered the correct reel number?');
 }
 
 //returns event obj if one is found and false if one is not
