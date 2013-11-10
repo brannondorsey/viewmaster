@@ -9,7 +9,6 @@ function Slide(reelNumber, imageNumber){
 }
 
 Slide.prototype.load = function(reelNumber, imageNumber){
-	console.log("I loaded");
 	if(reelNumber === undefined) reelNumber = this.reelNumber;
 	if(imageNumber === undefined) imageNumber = this.imageNumber;
 	var data = dataHand.loadSlideData(reelNumber, imageNumber);

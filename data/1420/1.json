@@ -1,0 +1,38 @@
+{
+  "name": "Omaha Beach From The Bluff",
+  "description": "Somewhere along the 5 mile English Channel between Sainte-Honorine-des-Pertes and Vierville-sur-Mer, France.",
+  "events": [
+    {
+      "name": "Midnight Effulgence",
+      "year": "1907",
+      "season": "Summer",
+      "description": "Wind and waves were a welcome relief to the man and woman that shared a nervous sandy stroll on the night of their first encounter. They knew little of each other and less of the life that together they would share. Four years later their daughter would be born, 10 their son, 35 their twin grandchildren, and 45 the mans death. They felt only their nerves and the wind, water, and salty sands that their bare feet walked. They never found love, but after that night the two never felt the way the used to."
+    },
+    {
+      "name": "Omaha Landing",
+      "year": "1944",
+      "season": "Spring",
+      "description": "A school of men beached into the jaws of death attempting to overtake Omaha. The occupancy of the coast fell to the duties of the United States Army with transport and shell support by the United States Navy and the British Royal Navy. Men drew their names in the sand that morning with their own bodies and the names left not permanently inscribed rarely remember its occasion by the smell of salt or the swaying brown grass upon the bluff."
+    },
+    {
+      "name": "Anniversary of Freya’s Blessing",
+      "year": "1976",
+      "season": "Summer",
+      "description": "Beaches around Normandy received an unusual overwhelm of tourism in the Summer of 76’. Surprisingly the influx was attributed to the Sisters of Freya, a feminist viking cult celebrating the anniversary of an 8th century viking invasion."
+    }
+  ],
+  "items": [
+    {
+      "name": "Line of ships",
+      "description": "A row of military vessels aligned end-to-end bobbing back and forth with each wave.",
+      "notes": []
+    },
+    {
+      "name": "Military uniform",
+      "description": "A long white surf board with a red stripe down the middle.",
+      "notes": [
+        "Although it is difficult to see it can be assumed that the soldier depicted in this slide is of rank Staff Sergeant or higher per the insignia on his right shoulder sleeve."
+      ]
+    }
+  ]
+}

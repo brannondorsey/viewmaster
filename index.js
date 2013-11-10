@@ -3,7 +3,7 @@ var Slide = require('./classes/Slide');
 global['printHelp'] = printHelp;
 
 //---------------------------------------------------------
-var slide = new Slide(1, 1);
+var slide = new Slide(1420, 1);
 var commands = fs.readJSONSync("commands.json");
 
 var promptIndex = 0;
@@ -48,7 +48,7 @@ function parse(response){
 		command = commands[i];
 		//console.log(command);
 		//console.log(command.usage);
-		if(command.usage == response){
+		if(command.usage.toLowerCase() == response.toLowerCase()){
 			passes = i;
 			break;
 		}else if(typeof command.regex !== 'undefined'){
@@ -159,12 +159,7 @@ function parseParameter(usage, response, characters){
 	var closingChar = characters.charAt(1);
 	var openIndex = usage.indexOf(openingChar);
 	var closeIndex = usage.indexOf(closingChar);
-	// var required = true;
-	// if(characters = '[]'){
-	// 	required = false;
-	// }
-	// console.log("openIndex: " + openIndex);
-	// console.log("closeIndex: " + closeIndex);
+
 	if(openIndex != -1 &&
 	   closeIndex != -1){
 		var removal = [];
