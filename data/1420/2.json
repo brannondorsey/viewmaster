@@ -1,0 +1,35 @@
+{
+  "name": "On Omaha Beach (Bloody Omaha)",
+  "description": "Omaha Beach shore, France.",
+  "events": [
+    {
+      "name": "Snorkeling",
+      "year": "2006",
+      "season": "Summer",
+      "description": "Two young boys vacationing from the South of France spent an afternoon bobbing at the will of the surf. Each fought with the constant condensation on their snorkeling masks caused by hurried breaths as the two learned to breath underwater. They collected shells, took them home with them, and haven’t returned since."
+    },
+    {
+      "name": "Omaha Landing",
+      "year": "1944",
+      "season": "Spring",
+      "description": "See slide 1. (i.e. 'go to 1')."
+    }
+  ],
+  "items": [
+    {
+      "name": "Water rescue ring buoy",
+      "description": "A United States Navy throw ring.",
+      "notes": [
+        "This ring was never thrown and never saved a life.",
+        "Manufactured at the Washington Navy Yard in 1943 this ring belonged to the Mine Sweeper USS OSPREY. The ship struck a mine and sunk off Omaha on June 5th 1944 and the ring was eventually buried in the sand on the beaches of Normandy."
+      ]
+    },
+    {
+      "name": "Ruined ships",
+      "description": "The remnants of two lost ships US Ships. The foremost appears to be a United States Army tank and infantry transport vessel.",
+      "notes": [
+        "The transport ship struck a sand bar while attempting to deliver its contents on shore. The ship received heavy shell fire while unloading. Few men reached the dry sands and the two tanks sunk barely submerged past twice their height. Eventually the ship was dislodged and floated closer towards land."
+      ]
+    }
+  ]
+}

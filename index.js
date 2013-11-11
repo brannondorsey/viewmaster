@@ -22,7 +22,7 @@ prompt(defaultPrompt);
 
 function prompt(str){
 	onEnter(str, function(response){
-		var nextPromptStr = parse(response);
+		var nextPromptStr = parse(response)
 		var output = (nextPromptStr != '') ? nextPromptStr + '\n' + defaultPrompt : defaultPrompt; 
 		prompt(output);
 	});

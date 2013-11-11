@@ -131,7 +131,7 @@ Slide.prototype.reload = function(){
 //Functions for printing to the console
 
 Slide.prototype.printDescription = function(){
-	console.log(this.description);
+	console.log(this._format(this.description));
 }
 
 Slide.prototype.printHistory = function(){
@@ -141,7 +141,7 @@ Slide.prototype.printHistory = function(){
 		for(var i = 0; i < events.length; i++){
 			var event = events[i];
 			console.log(event.name + ', ' + event.season + ' ' + event.year);
-			console.log(event.description);
+			console.log(this._format(event.description));
 			console.log();
 		}
 	}else console.log('There are no events assosciated with this location yet.');
@@ -165,7 +165,7 @@ Slide.prototype.printEvent = function(response, hasParameter){
 	if(event){
 		console.log();
 		console.log(event.name + ', ' + event.season + ' ' + event.year);
-		console.log(event.description);
+		console.log(this._format(event.description));
 		console.log();
 	}else return false;
 }
@@ -188,7 +188,7 @@ Slide.prototype.printItemDescription = function(response, hasParameter){
 		var parameter = response;
 		var item = this._getItemByName(parameter);
 		if(item){
-			console.log(item.description);
+			console.log(this._format(item.description));
 		}else console.log('This item doesn\'t exist. Type \'get item list\' to view available items.');
 	}else return false;
 }
@@ -203,7 +203,7 @@ Slide.prototype.printItemNotes = function(response, hasParameter){
 				console.log();
 				for(var i = 0; i < numNotes; i++){
 					var note = item.notes[i];
-					console.log(note);
+					console.log(this._format(note));
 					console.log();
 				}
 				console.log();
@@ -280,6 +280,26 @@ Slide.prototype._getItemByName = function(name){
 		if(this.items[i].name.toLowerCase() == name.toLowerCase()) return this.items[i];
 	}
 	return false;
+}
+
+//creates linebreaks so as not to create linebreaks in the middle of words
+Slide.prototype._format = function(str){
+	var maxCharWidth = 100;
+	//console.log(str);
+	if(str.length > maxCharWidth){
+		for(var i = maxCharWidth; i < str.length; i+=maxCharWidth){
+			var scanningForSpace = true;
+			var index = i;
+			while(scanningForSpace){
+				if(str.charAt(index) == ' '){
+					//below is an equivelancy of string.replaceAt
+					str = str.substr(0, index) + '\n' + str.substr(index+'\n'.length);
+					scanningForSpace = false;
+				}else index--;
+			}
+		}
+	}
+	return str;
 }
 
 module.exports = Slide;

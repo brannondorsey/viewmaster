@@ -175,10 +175,18 @@
 		"description": "adds a new note to the <item>",
 		"prompts": [
 			{
+				"prompt": "Do you remember a note regarding this item?",
+				"regex": "^[yn]$",
+				"error": "Please type 'y' for yes or 'n' for no.",
+				"function": "shouldContinue",
+				"class": "slide"
+			},
+			{
 				"prompt": "What does the note say?",
 				"regex": ".{20,}",
 				"error": "Item notes must be at least 20 characters in length.",
-				"function": "addItemNote"
+				"function": "addItemNote",
+				"class": "slide"
 			}
 		],
 		"preFunction": "selectItem",

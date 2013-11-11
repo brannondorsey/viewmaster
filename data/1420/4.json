@@ -1,0 +1,40 @@
+{
+  "name": "St. Lo",
+  "description": "Notre-Dame Church, St. Lo France.",
+  "events": [
+    {
+      "name": "Major of St. Lo",
+      "year": "1944",
+      "season": "Summer",
+      "description": "During the liberation of the city of St. Lo on July 18th, 1944 Major Thomas Howie, Commander of the 3rd Battalion, 116th Infantry Regiment of the U.S. Army's 29th Division was killed just before his unit entered the city. His men strapped his dead body on the hood of a jeep at the front of the unit making him the first American to enter the city."
+    },
+    {
+      "name": "Blessing of the Animals",
+      "year": "2000",
+      "season": "Spring",
+      "description": "Each year the Notre-Dame church in St. Lo hosts a blessing of the Animals service catering to the religious needs of the domesticated animals (and their owners) who live in the surrounding area. In 2000 the local Haras National Stud Farm, the largest of the 23 stud farms in France, brought their animals to partake in the service. The collection of blessed horses represented forty breeders and 7 pedigrees."
+    },
+    {
+      "name": "Defacement of Medieval Walls",
+      "year": "1960",
+      "season": "Summer",
+      "description": "An area youth spray painted \"YOUNG FRANCE IS LOST\" (English translation) in black paint across a small section of the medieval walls that surround much of the city of St. Lo."
+    }
+  ],
+  "items": [
+    {
+      "name": "Collection of rubble",
+      "description": "A vast amount of broken stone and cement foundations, shell casings, bones and other detritus that lined the bed of the Historic city.",
+      "notes": [
+        "The scattered assortment of debris that covered St. Lo in the mid-to-late 1940s has since been removed."
+      ]
+    },
+    {
+      "name": "Future location of the YOUNG FRANCE IS LOST defacement",
+      "description": "See the Defacement of Medieval Walls event on this slide for a description of the event that created this item. (i.e. 'get Defacement of Medieval Walls event')",
+      "notes": [
+        "When viewing this slide the future location of the YOUNG FRANCE IS LOST defacement can be hypothesized to be located on the wall directly below the large bush optically to the immediate right of the Notre-Dame church. The location is in the center right of the image. At the time that this photograph was taken this defacement did not yet exist."
+      ]
+    }
+  ]
+}
