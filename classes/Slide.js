@@ -179,7 +179,7 @@ Slide.prototype.printItemList = function(){
 		}
 		console.log();
 	}else{
-		console.log("No items have been added to this location yet");
+		console.log("No items have been added to this location yet.");
 	} 
 }
 
@@ -213,6 +213,11 @@ Slide.prototype.printItemNotes = function(response, hasParameter){
 }
 
 //------------------------------------------------------------------
+
+//returns 1 if true and -1 if false
+Slide.prototype.shouldContinue = function(response){
+	return (response.trim().toLowerCase() == 'y') ? 1 : -1;
+}
 
 Slide.prototype.getHistory = function(){
 	var copy = this.events.slice(0);

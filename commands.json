@@ -6,6 +6,12 @@
 		"class": "global"
 	},
 	{
+		"usage": "clear",
+		"description": "clears the console",
+		"function": "clearConsole",
+		"class": "global"
+	},
+	{
 		"usage": "using <reelNumber>",
 		"regex": "using [0-9]{1,4}",
 		"error": "a 1-4 digit reelNumber must be provided (i.e. 'using 5')",
@@ -22,7 +28,7 @@
 	{
 		"usage": "go to <slideNumber>",
 		"regex": "go to [0-7]",
-		"error": "an image number between 1 and 7 must be provided (i.e. 'go to 7')",
+		"error": "an image number between 1 and 7 must be provided (i.e. 'go to 7').",
 		"description": "instructs the program to use the slide at <slideNumber>",
 		"function": "advance",
 		"class": "slide"
@@ -49,7 +55,7 @@
 		"usage": "get event [name]",
 		"regex": "get event[0-9a-zA-Z ]*",
 		"description": "prints [name] event or random event if [name] not given", 
-		"error": "an invalid event name was provided",
+		"error": "an invalid event name was provided.",
 		"function": "printEvent",
 		"class": "slide"
 	},
@@ -62,7 +68,7 @@
 	{
 		"usage": "get <item> description",
 		"regex": "get [0-9a-zA-Z ]{2,25} description",
-		"error": "You must provide a valid item name containing between 2-25 letters, numbers, and spaces (i.e. 'get shovel description')",
+		"error": "You must provide a valid item name containing between 2-25 letters, numbers, and spaces (i.e. 'get shovel description').",
 		"description": "prints a description of the item",
 		"function": "printItemDescription",
 		"class": "slide"
@@ -70,7 +76,7 @@
 	{
 		"usage": "get <item> notes",
 		"regex": "get [0-9a-zA-Z_ ]{2,25} notes",
-		"error": "You must provide a valid item name containing between 2-25 letters, numbers, and spaces (i.e. 'get shovel notes')",
+		"error": "You must provide a valid item name containing between 2-25 letters, numbers, and spaces (i.e. 'get shovel notes').",
 		"description": "prints all of the notes associated with the <item>",
 		"function": "printItemNotes",
 		"class": "slide"
@@ -82,7 +88,7 @@
 			{
 				"prompt": "Please describe this location.",
 				"regex": ".{25,}",
-				"error": "Location descriptions must be longer than 25 characters",
+				"error": "Location descriptions must be longer than 25 characters.",
 				"function": "addDescription",
 				"class": "slide"
 			}
@@ -95,30 +101,37 @@
 		"description": "adds an event to the location",
 		"prompts": [
 			{
+				"prompt": "Do you know something that happened here? (y/n) ",
+				"regex": "^[yn]$",
+				"error": "Please type 'y' for yes or 'n' for no.",
+				"function" : "shouldContinue",
+				"class": "slide"
+			},
+			{
 				"prompt": "What was the event called?",
 				"regex": "[a-zA-Z0-9 ]{2,25}",
-				"error": "Event names must must be between 2-25 characters and may contain only letters, digits, and spaces",
+				"error": "Event names must must be between 2-25 characters and may contain only letters, digits, and spaces.",
 				"function" : "addEventName",
 				"class": "slide"
 			},
 			{
 				"prompt": "In what year did the event occur (YYYY)?",
 				"regex": "[0-9][0-9][0-9][0-9]",
-				"error": "Years must be specified using four digits",
+				"error": "Years must be specified using four digits.",
 				"function" : "addEventYear",
 				"class": "slide"
 			},
 			{
 				"prompt": "In what season did the event occur (i.e. Fall)?",
 				"regex": "(spring)|(summer)|(fall)|(winter)",
-				"error": "Only the seasons spring, summer, fall, and winter are accepted",
+				"error": "Only the seasons 'Spring', 'Summer', 'Fall', and 'Winter' are accepted.",
 				"function" : "addEventSeason",
 				"class": "slide"
 			},
 			{
 				"prompt": "Please describe the event assosciated with this item.",
 				"regex": ".{25,}",
-				"error": "Event descriptions must be longer than 25 characters",
+				"error": "Event descriptions must be longer than 25 characters.",
 				"function": "addEventDescription",
 				"class": "slide"
 			}
@@ -131,16 +144,23 @@
 		"description": "adds an item to the location",
 		"prompts": [
 			{
+				"prompt": "Do you remember this item well? (y/n) ",
+				"regex": "^[yn]$",
+				"error": "Please type 'y' for yes or 'n' for no.",
+				"function" : "shouldContinue",
+				"class": "slide"
+			},
+			{
 				"prompt": "What is this item called?",
 				"regex": "[a-zA-Z0-9 ]{2,25}",
-				"error": "Item names must must be between 2-25 characters and may contain only letters, digits, and spaces",
+				"error": "Item names must must be between 2-25 characters and may contain only letters, digits, and spaces.",
 				"function": "addItemName",
 				"class": "slide"
 			},
 			{
 				"prompt": "Please describe this item.",
 				"regex": ".{10,}",
-				"error": "Item descriptions must be longer than 10 characters",
+				"error": "Item descriptions must be longer than 10 characters.",
 				"function": "addItemDescription",
 				"class": "slide"
 			}
@@ -151,13 +171,13 @@
 	{
 		"usage": "add <item> note",
 		"regex": "add [0-9a-zA-Z_ ]{2,25} note",
-		"error": "You must provide a valid item name containing between 2-25 letters, numbers, and spaces (i.e. 'add shovel note')",
+		"error": "You must provide a valid item name containing between 2-25 letters, numbers, and spaces (i.e. 'add shovel note').",
 		"description": "adds a new note to the <item>",
 		"prompts": [
 			{
 				"prompt": "What does the note say?",
 				"regex": ".{20,}",
-				"error": "Item notes must be at least 20 characters in length",
+				"error": "Item notes must be at least 20 characters in length.",
 				"function": "addItemNote"
 			}
 		],

@@ -29,10 +29,15 @@
     },
     {
       "name": "Military uniform",
-      "description": "A long white surf board with a red stripe down the middle.",
+      "description": "A United States Army military uniform from the second World War.",
       "notes": [
         "Although it is difficult to see it can be assumed that the soldier depicted in this slide is of rank Staff Sergeant or higher per the insignia on his right shoulder sleeve."
       ]
+    },
+    {
+      "notes": [],
+      "name": "My super duper item!",
+      "description": "Its a really nice item you know."
     }
   ]
 }

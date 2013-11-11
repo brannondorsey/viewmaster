@@ -1,6 +1,7 @@
 var fs = require('fs-extra');
 var Slide = require('./classes/Slide');
 global['printHelp'] = printHelp;
+global['clearConsole'] = clearConsole;
 
 //---------------------------------------------------------
 var slide = new Slide(1420, 1);
@@ -42,6 +43,7 @@ function parse(response){
 	var passes = false;
 	var finishedPrompt = false;
 	var command;
+	var success = true;
 	//console.log();
 	//check if the response is a main command
 	for(var i = 0; i < commands.length; i++){
@@ -66,7 +68,7 @@ function parse(response){
 	   promptIndex == 0){
 		command = commands[i];
 
-		var success = true;
+		//var success = true;
 
 		var required = parseParameter(command.usage, response, '<>');
 		var optional = parseParameter(command.usage, response, '[]');
@@ -101,6 +103,7 @@ function parse(response){
 			}
 		}
 		if(success === false) console.log(command.error);
+		
 	}
 
 	// console.log("current prompt max " + currentPromptMax);
@@ -125,9 +128,16 @@ function parse(response){
 				if(regex.test(response)){
 					//console.log("got in 3");
 					//if it does then execute the function assosciated with the last prompt
-					slide[previousPrompt.function](response);
+					success = slide[previousPrompt.function](response);
 					promptIndex++;
-					if(promptIndex != currentPromptMax){ //if there are still more prompts...
+					//if a checkContinue function was passed an 'n'
+					if(success == -1){
+						//do nothing and break out of the prompt list
+						promptIndex = 0;
+						currentPromptMax = 0;
+						finishedPrompt = true;
+					}
+					else if(promptIndex != currentPromptMax){ //if there are still more prompts...
 						output = prompt.prompt;
 					}else{ //if all prompts have been completed
 						if(currentParentCommand.class == 'slide'){
@@ -195,6 +205,15 @@ function printHelp(){
 		console.log(command.usage + padding + command.description);
 	}
 	console.log();
+}
+
+function clearConsole(){
+	var numLines = 30;
+	var returns;
+	for(var i = 0; i < numLines; i++){
+		returns += '\n';
+	}
+	console.log(returns);
 }
 
 //returns an assoc array of all commands that require further prompts
