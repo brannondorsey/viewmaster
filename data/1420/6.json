@@ -1,0 +1,33 @@
+{
+  "name": "Liesieux",
+  "description": "Liesieux Cathedral in the commune of the Base-Normandie region in northwest France. A capital city characterized by valleys and hedged farmland.",
+  "events": [
+    {
+      "name": "First Helicopter Flight",
+      "year": "1907",
+      "season": "Winter",
+      "description": "French engineer Paul Cornu successfully lingered unrestrained in space aboard his rotary ring craft making him pilot and inventor to the first flying machine to have risen from the ground without the use of wings. Paul floated weightlessly a foot above the ground for twenty seconds in front of the Cathedral on that November afternoon. The craft was scarcely maneuverable and he rarely demonstrated its ability again. He spent the majority of the rest of his life manufacturing bicycles in Normandy."
+    },
+    {
+      "name": "Carrefour Protests",
+      "year": "1994",
+      "season": "Winter",
+      "description": "A small group of Lieseux business owners convened three times at the future site of a new Carrefour (a European equivalent to a Walmart superstore) to protest its inevitable arrival. The group was motivated by fear of losing the livelihood that they had developed over the decades that many of there local stores had been in business. Each felt economically threatened by the proposition of a commercial conglomerate like Carrefour providing to the inhabitants of Lieseux. Together they felt an illusion of power and control in affecting a decision that was out of their control. The Lieseux Carrefour store opened two years later."
+    },
+    {
+      "name": "Writing",
+      "year": "1960",
+      "season": "Summer",
+      "description": "A son of the baker that lived in one of the white houses adjacent to the Lieseux Cathedral spent his summer in his father's attic writing a story about a boy and his best friend who spent their days filling pages of their respective books with drawings of dragons and secret hideaways. The two completed their colored-pencil collections and eventually their books were lost and their memories of the days spent together faded. The boy finished his story but had no one to share it with. He still remembers it though."
+    }
+  ],
+  "items": [
+    {
+      "name": "Blue truck",
+      "description": "A blue winery truck parked across the street from the church in the middle of the frame.",
+      "notes": [
+        "This blue covered pickup truck could often be seen parked near the Cathedral on Tuesdays during the Fall of 1946. Its owner, Arber Bellard, made a habit of visiting the Lieseux Cathedral after his weekly drives from the Cambremer winery where he was employed as a delivery driver."
+      ]
+    }
+  ]
+}

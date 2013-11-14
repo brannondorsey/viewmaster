@@ -1,0 +1,32 @@
+{
+  "name": "Avranches (Scene of Patton’s Break-through)",
+  "description": "A commune in the Manche department in the Lower Normandy region in northwestern France. Inhabitants of Avranches are called Avranchinais.",
+  "events": [
+    {
+      "name": "Bastille Parade",
+      "year": "1880",
+      "season": "Summer",
+      "description": "Members of the French Military living in Avranches partook in a small Bastille Day parade for the satisfaction of its 8,000 inhabitants. The soldiers marched a figure 8 pattern around the town limits crossing overtop the stone bridge at the its center twice."
+    },
+    {
+      "name": "Telephone Line Erection",
+      "year": "1930",
+      "season": "Fall",
+      "description": "A team of tele electricians spent three months rigging the standard web of telephone lines that were used by the citizens of Avranches until the lines were update in 1954. There efforts enabled national telecommunication between Avranches and 200 other cities in France."
+    }
+  ],
+  "items": [
+    {
+      "name": "Telephone lines",
+      "description": "The two telephone poles and multiple telephone lines visible in the image. See the Telephone Line Erection event for more information. (i.e. 'get Telephone Line Erection event')",
+      "notes": []
+    },
+    {
+      "name": "Dark Silhouettes",
+      "description": "The large dark form in background of the image. Are these silhouettes trees or mountains?",
+      "notes": [
+          "The dark silhouettes are probably trees."
+      ]
+    }
+  ]
+}

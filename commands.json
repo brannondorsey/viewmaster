@@ -12,14 +12,6 @@
 		"class": "global"
 	},
 	{
-		"usage": "using <reelNumber>",
-		"regex": "using [0-9]{1,4}",
-		"error": "a 1-4 digit reelNumber must be provided (i.e. 'using 5')",
-		"description": "specifies the reel ID number using <realNumber>",
-		"function": "newReel",
-		"class": "slide"
-	},
-	{
 		"usage": "next",
 		"description": "notifies the program that you have advanced the reel once",
 		"function": "advance",
@@ -34,15 +26,15 @@
 		"class": "slide"
 	},
 	{
-		"usage": "get description",
-		"description": "prints the current description of the location",
-		"function": "printDescription",
+		"usage": "get name",
+		"description": "prints the name of the location",
+		"function": "printName",
 		"class": "slide"
 	},
 	{
-		"usage": "get history",
-		"description": "prints all of the events associated with the location",
-		"function": "printHistory",
+		"usage": "get description",
+		"description": "prints the current description of the location",
+		"function": "printDescription",
 		"class": "slide"
 	},
 	{

@@ -1,0 +1,33 @@
+{
+  "name": "Caen",
+  "description": "Lower Normandy’s largest city.",
+  "events": [
+    {
+      "name": "Memorial for Peace",
+      "year": "1988",
+      "season": "Spring",
+      "description": "Near this ground on the 44th anniversary of the D-Day invasion of June 6th 1944 the Memorial de Caen Peace Monument was opened. The memorial was constructed with an attempt to represent Holocaust survivor and writer Elie Wiesel's idea that \"Peace is not a gift from God to man, but a gift from man to himself.\" Each year the monument receives nearly the equivalent number of visitors as the population of Caen itself."
+    },
+    {
+      "name": "Tour De France",
+      "year": "1947",
+      "season": "Summer",
+      "description": "Caen claimed a stage in the famous Tour De France domestic bike race. The city would not be fully restored for 11 more years. This site would continue to be periodically included in the race until early into the next millennia."
+    },
+    {
+      "name": "Summer Picnics",
+      "year": "1902",
+      "season": "Summer",
+      "description": "Area residents gathered on the lawn of the church each second Sunday immediately following the worship services to share with each other the food and drink they had prepared early those mornings. Such events were proposed to encourage fellowship in the community around God and often meals were shared between non believers, namely the youth."
+    }
+  ],
+  "items": [
+    {
+      "name": "Stone steeple",
+      "description": "The shorter of the two steeples. Extends from the center of the church.",
+      "notes": [
+        "Adorned with seemingly endless elaborate stone carvings this monument was intended to be appreciated most by the Lord himself. It was rarely seen by any other than the maintenance men that made the rooftop assent for annual gutter repair and leak patching."
+      ]
+    }
+  ]
+}

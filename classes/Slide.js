@@ -12,6 +12,7 @@ Slide.prototype.load = function(reelNumber, imageNumber){
 	if(reelNumber === undefined) reelNumber = this.reelNumber;
 	if(imageNumber === undefined) imageNumber = this.imageNumber;
 	var data = dataHand.loadSlideData(reelNumber, imageNumber);
+	this.name = data.name;
 	this.description = data.description;
 	this.events = data.events;
 	this.items = data.items;
@@ -129,6 +130,10 @@ Slide.prototype.reload = function(){
 
 //------------------------------------------------------------------
 //Functions for printing to the console
+
+Slide.prototype.printName = function(){
+	console.log(this.name);
+}
 
 Slide.prototype.printDescription = function(){
 	console.log(this._format(this.description));

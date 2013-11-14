@@ -1,0 +1,16 @@
+[
+	{
+			"usage": "using <reelNumber>",
+			"regex": "using [0-9]{1,4}",
+			"error": "a 1-4 digit reelNumber must be provided (i.e. 'using 5')",
+			"description": "specifies the reel ID number using <realNumber>",
+			"function": "newReel",
+			"class": "slide"
+	},
+	{
+			"usage": "get history",
+			"description": "prints all of the events associated with the location",
+			"function": "printHistory",
+			"class": "slide"
+	}
+]
