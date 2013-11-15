@@ -4,6 +4,8 @@ A companion command line application for use with physical Viewmaster reels.
 
 A user inserts reels into their Viewmaster and then uses the Viewmaster Narrative Companion on their computer's terminal to create and edit fictional histories of the images they are viewing. The Narrative companion acts as a wiki style authorial narrative database for adding contextual and imaginative language to 3D Viewmaster travel images of the past.
 
+`config.txt` belongs at `/boot/config.txt` for 80s monitor.
+
 ##Commands
 
 - `help`
