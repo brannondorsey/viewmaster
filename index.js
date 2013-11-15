@@ -44,6 +44,7 @@ function parse(response){
 	var finishedPrompt = false;
 	var command;
 	var success = true;
+	var preFunctionValid = true;
 	//console.log();
 	//check if the response is a main command
 	for(var i = 0; i < commands.length; i++){
@@ -102,14 +103,21 @@ function parse(response){
 				success = global[fn](response, hasParameter);
 			}
 		}
-		if(success === false) console.log(command.error);
+		if(success === false){
+			console.log(command.error);
+			if(command.preFunction !== undefined){
+				console.log("got here");
+				preFunctionValid = false;
+			}
+		} 
 		
 	}
 
 	// console.log("current prompt max " + currentPromptMax);
 	// console.log("current prompt index " + promptIndex);
 	if(currentPromptMax != 0 &&
-	   promptIndex <= currentPromptMax){
+	   promptIndex <= currentPromptMax &&
+	   preFunctionValid){
 
 		//if there are still prompts left
 		if(promptIndex < currentPromptMax){

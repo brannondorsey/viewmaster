@@ -12,6 +12,8 @@ Slide.prototype.load = function(reelNumber, imageNumber){
 	if(reelNumber === undefined) reelNumber = this.reelNumber;
 	if(imageNumber === undefined) imageNumber = this.imageNumber;
 	var data = dataHand.loadSlideData(reelNumber, imageNumber);
+	this.reelNumber = reelNumber;
+	this.imageNumber = imageNumber;
 	this.name = data.name;
 	this.description = data.description;
 	this.events = data.events;
@@ -59,8 +61,10 @@ Slide.prototype.selectItem = function(response, hasParameter){
 		var item = this._getItemByName(response);
 		if(item){
 			this.selectedItem = item;
-		}else console.log('This item doesn\'t exist. Type \'get item list\' to view available items.');
-	}else return false;
+			return true;
+		}else console.log('This item doesn\'t exist. Type \'get item list\' to view available items.');		
+	}
+	return false;
 }
 
 Slide.prototype.addItemName = function(name){
@@ -194,8 +198,10 @@ Slide.prototype.printItemDescription = function(response, hasParameter){
 		var item = this._getItemByName(parameter);
 		if(item){
 			console.log(this._format(item.description));
+			return true;
 		}else console.log('This item doesn\'t exist. Type \'get item list\' to view available items.');
-	}else return false;
+	}
+	return false;
 }
 
 Slide.prototype.printItemNotes = function(response, hasParameter){
@@ -211,10 +217,11 @@ Slide.prototype.printItemNotes = function(response, hasParameter){
 					console.log(this._format(note));
 					console.log();
 				}
-				console.log();
 			}else console.log('This item doesn\'t have any notes. Add one using \'add <item> note\'.');
+			return true;
 		}else console.log('This item doesn\'t exist. Type \'get item list\' to view available items.');
-	}else return false;
+	}
+	return false;
 }
 
 //------------------------------------------------------------------
@@ -259,6 +266,7 @@ Slide.prototype.advance = function(response, hasParameter){
 		this.load(this.reelNumber, imageNumber);
 	}else{
 		var newImageNumber = (this.imageNumber < 7) ? this.imageNumber + 1 : 1;
+		console.log(newImageNumber);
 		this.load(this.reelNumber, newImageNumber);
 	}
 	if(this.logChanges)console.log("Slide advanced.");
@@ -289,7 +297,7 @@ Slide.prototype._getItemByName = function(name){
 
 //creates linebreaks so as not to create linebreaks in the middle of words
 Slide.prototype._format = function(str){
-	var maxCharWidth = 100;
+	var maxCharWidth = 75;
 	//console.log(str);
 	if(str.length > maxCharWidth){
 		for(var i = maxCharWidth; i < str.length; i+=maxCharWidth){
