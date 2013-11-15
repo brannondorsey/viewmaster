@@ -266,7 +266,6 @@ Slide.prototype.advance = function(response, hasParameter){
 		this.load(this.reelNumber, imageNumber);
 	}else{
 		var newImageNumber = (this.imageNumber < 7) ? this.imageNumber + 1 : 1;
-		console.log(newImageNumber);
 		this.load(this.reelNumber, newImageNumber);
 	}
 	if(this.logChanges)console.log("Slide advanced.");

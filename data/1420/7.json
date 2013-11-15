@@ -6,13 +6,13 @@
       "name": "Bastille Parade",
       "year": "1880",
       "season": "Summer",
-      "description": "Members of the French Military living in Avranches partook in a small Bastille Day parade for the satisfaction of its 8,000 inhabitants. The soldiers marched a figure 8 pattern around the town limits crossing overtop the stone bridge at the its center twice."
+      "description": "Members of the French Military living in Avranches partook in a small Bastille Day parade for the satisfaction of its 8,000 inhabitants. The soldiers marched a figure 8 pattern around the town limits crossing overtop the stone bridge at its center twice."
     },
     {
       "name": "Telephone Line Erection",
       "year": "1930",
       "season": "Fall",
-      "description": "A team of tele electricians spent three months rigging the standard web of telephone lines that were used by the citizens of Avranches until the lines were update in 1954. There efforts enabled national telecommunication between Avranches and 200 other cities in France."
+      "description": "A team of tele electricians spent three months rigging the standard web of telephone lines that were used by Avranchinais until the lines were update in 1954. There efforts enabled national telecommunication between Avranches and 200 other cities in France."
     }
   ],
   "items": [
@@ -23,7 +23,7 @@
     },
     {
       "name": "Dark Silhouettes",
-      "description": "The large dark form in background of the image. Are these silhouettes trees or mountains?",
+      "description": "The large dark form in the background of the image. Are these silhouettes trees or mountains?",
       "notes": [
           "The dark silhouettes are probably trees."
       ]

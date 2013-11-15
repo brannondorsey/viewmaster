@@ -59,16 +59,16 @@
 	},
 	{
 		"usage": "get <item> description",
-		"regex": "get [0-9a-zA-Z ]{2,25} description",
-		"error": "You must provide a valid item name containing between 2-25 letters, numbers, and spaces (i.e. 'get shovel description').",
+		"regex": "get [0-9a-zA-Z ]{2,60} description",
+		"error": "You must provide a valid item name containing between 2-60 letters, numbers, and spaces (i.e. 'get shovel description').",
 		"description": "prints a description of the item",
 		"function": "printItemDescription",
 		"class": "slide"
 	},
 	{
 		"usage": "get <item> notes",
-		"regex": "get [0-9a-zA-Z_ ]{2,25} notes",
-		"error": "You must provide a valid item name containing between 2-25 letters, numbers, and spaces (i.e. 'get shovel notes').",
+		"regex": "get [0-9a-zA-Z_ ]{2,60} notes",
+		"error": "You must provide a valid item name containing between 2-60 letters, numbers, and spaces (i.e. 'get shovel notes').",
 		"description": "prints all of the notes associated with the <item>",
 		"function": "printItemNotes",
 		"class": "slide"
