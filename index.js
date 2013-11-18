@@ -44,8 +44,7 @@ function parse(response){
 	var finishedPrompt = false;
 	var command;
 	var success = true;
-	var preFunctionValid = true;
-	//console.log();
+
 	//check if the response is a main command
 	for(var i = 0; i < commands.length; i++){
 		command = commands[i];
@@ -69,8 +68,6 @@ function parse(response){
 	   promptIndex == 0){
 		command = commands[i];
 
-		//var success = true;
-
 		var required = parseParameter(command.usage, response, '<>');
 		var optional = parseParameter(command.usage, response, '[]');
 		var hasParameter = false;
@@ -84,13 +81,18 @@ function parse(response){
 		}
 
 		//if there are prompts
-		if(typeof command.prompts !== 'undefined'){
+		if(command.prompts !== undefined){
 
 			currentPromptMax = promptMaxes[command.usage] + 1;
 			currentParentCommand = command;
 			if(command.preFunction !== undefined){
 				if(command.class == 'slide'){
 					success = slide[command.preFunction](response, hasParameter);
+					//if the preFunction failed don't allow the sub prompts to be executed
+					if(success === false){
+						currentPromptMax = null;
+						currentParentCommand = null;
+					}
 				}
 			}
 
@@ -103,12 +105,9 @@ function parse(response){
 				success = global[fn](response, hasParameter);
 			}
 		}
+
 		if(success === false){
 			console.log(command.error);
-			if(command.preFunction !== undefined){
-				console.log("got here");
-				preFunctionValid = false;
-			}
 		} 
 		
 	}
@@ -116,8 +115,7 @@ function parse(response){
 	// console.log("current prompt max " + currentPromptMax);
 	// console.log("current prompt index " + promptIndex);
 	if(currentPromptMax != 0 &&
-	   promptIndex <= currentPromptMax &&
-	   preFunctionValid){
+	   promptIndex <= currentPromptMax){
 
 		//if there are still prompts left
 		if(promptIndex < currentPromptMax){
@@ -131,10 +129,10 @@ function parse(response){
 				output = prompt.prompt;
 			}else{
 				var regex = RegExp(previousPrompt.regex, 'i');
-				// console.log(previousPrompt);
+
 				//test to make sure that the response fulfills the previous prompts regex
 				if(regex.test(response)){
-					//console.log("got in 3");
+					
 					//if it does then execute the function assosciated with the last prompt
 					success = slide[previousPrompt.function](response);
 					promptIndex++;
@@ -186,13 +184,11 @@ function parseParameter(usage, response, characters){
 
 		var parameter
 		// //if a parameter was provided
-		// if(parameter != removal[0]){
 		parameter = response.replace(removal[0], '');
 		// console.log('The parameter after front manipulation is: ' + parameter);
 		parameter = parameter.replace(removal[1], '');
 		// console.log('The parameter after all manipulation is: ' + parameter);
 		if(parameter != '') return parameter.trim();
-		//}
 	}
 	return false;
 }

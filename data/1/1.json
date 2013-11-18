@@ -63,7 +63,9 @@
       "description": "Its a really really nice item"
     },
     {
-      "notes": [],
+      "notes": [
+        "It said that this is a pretty cool item"
+      ],
       "name": "My super test item",
       "description": "Its really just a little test."
     }

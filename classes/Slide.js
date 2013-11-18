@@ -99,8 +99,7 @@ Slide.prototype.saveEvent = function(){
 }
 
 Slide.prototype.saveItem = function(){
-	// console.log("reelNumber: " + this.reelNumber);
-	// console.log("imageNumber: " + this.imageNumber);
+	
 	if(dataHand.saveItem(this.reelNumber, this.imageNumber, this.newItem)){
 		this.reload();
 		this.newItem = {}; //clear this.newEvent
@@ -122,7 +121,7 @@ Slide.prototype.saveItemNote = function(){
 		this.reload();
 		this.newItem = {}; //clear this.newEvent
 		if(this.logChanges){
-			console.log("Item saved. You should add some notes too: 'add <item> note'.");
+			console.log("Item note saved.");
 		}
 	}else console.log("Error saving item.");	
 	this.selectedItem = {};
