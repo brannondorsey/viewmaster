@@ -1,5 +1,5 @@
 {
-  "description": "This is really just a nice description.",
+  "description": "Its a pretty dope location if you ask me",
   "events": [
     {
       "name": "Hall Canyon",
@@ -24,6 +24,12 @@
       "year": "1984",
       "season": "Fall",
       "description": "osioisjdfjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjj"
+    },
+    {
+      "name": "A really big event",
+      "year": "1888",
+      "season": "Fall",
+      "description": "oisjdfojsdofijsoidfjosdijfoisdjfoisjdfoijsdofijsdoifjosdijf"
     }
   ],
   "items": [
@@ -55,6 +61,11 @@
       "notes": [],
       "name": "Super item",
       "description": "Its a really really nice item"
+    },
+    {
+      "notes": [],
+      "name": "My super test item",
+      "description": "Its really just a little test."
     }
   ]
 }

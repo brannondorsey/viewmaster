@@ -12,5 +12,30 @@
 			"description": "prints all of the events associated with the location",
 			"function": "printHistory",
 			"class": "slide"
+	},
+	{
+		"usage": "add <item> note",
+		"regex": "add [0-9a-zA-Z_ ]{2,25} note",
+		"error": "You must provide a valid item name containing between 2-25 letters, numbers, and spaces (i.e. 'add shovel note').",
+		"description": "adds a new note to the <item>",
+		"prompts": [
+			{
+				"prompt": "Do you remember a note regarding this item? (y/n)",
+				"regex": "^[yn]$",
+				"error": "Please type 'y' for yes or 'n' for no.",
+				"function": "shouldContinue",
+				"class": "slide"
+			},
+			{
+				"prompt": "What does the note say?",
+				"regex": ".{20,}",
+				"error": "Item notes must be at least 20 characters in length.",
+				"function": "addItemNote",
+				"class": "slide"
+			}
+		],
+		"preFunction": "selectItem",
+		"function": "saveItemNote",
+		"class": "slide"
 	}
 ]
