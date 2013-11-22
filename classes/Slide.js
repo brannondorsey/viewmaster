@@ -1,11 +1,31 @@
 var DataHandler = require("./DataHandler");
 var dataHand = new DataHandler(); //keep dataHand private
+var SerialPort = require("serialport").SerialPort
+var serialPort = new SerialPort("/dev/ttyACM0", {
+	baudrate: 9600
+});
+
+// serialport.list(function (err, ports) {
+//   ports.forEach(function(port) {
+//     console.log(port.comName);
+//     console.log(port.pnpId);
+//     console.log(port.manufacturer);
+//   });
+// });
 
 function Slide(reelNumber, imageNumber){
 	this.logChanges = true;
 	this.reelNumber = reelNumber;
 	this.imageNumber = imageNumber;
 	this.load();
+	var self = this;
+	serialPort.open(function () {
+	  serialPort.on('data', function(data) {
+	    console.log('data received: ' + data);
+	    console.log('data is a ' + typeof data);
+	    if(self.logChanges) console.log('Slide advanced.');
+	  });
+	});
 }
 
 Slide.prototype.load = function(reelNumber, imageNumber){
@@ -267,7 +287,8 @@ Slide.prototype.advance = function(response, hasParameter){
 		var newImageNumber = (this.imageNumber < 7) ? this.imageNumber + 1 : 1;
 		this.load(this.reelNumber, newImageNumber);
 	}
-	if(this.logChanges)console.log("Slide advanced.");
+	serialPort.write(127);
+	//if(this.logChanges) console.log("Slide advanced.");
 }
 
 Slide.prototype.newReel = function(reelNumber){
