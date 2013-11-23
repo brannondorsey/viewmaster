@@ -21,8 +21,6 @@ function Slide(reelNumber, imageNumber){
 	var self = this;
 	serialPort.open(function () {
 	  serialPort.on('data', function(data) {
-	    console.log('data received: ' + data);
-	    console.log('data is a ' + typeof data);
 	    if(self.logChanges) console.log('Slide advanced.');
 	  });
 	});

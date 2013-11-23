@@ -7,7 +7,7 @@ byte advanceByte = '1';
 byte finishedByte = '0';
 
 int s = 15; //speed of change
-int wait = 500; //how long to wait once 180 is reached
+int wait = 100; //how long to wait once 180 is reached
  
 Servo myservo;  // create servo object to control a servo 
                 // a maximum of eight servo objects can be created 
