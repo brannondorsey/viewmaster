@@ -3,8 +3,8 @@
 
 int transistor = 7;
 boolean advance = false;
-byte advanceByte = 127;
-byte finishedByte = 0;
+byte advanceByte = '1';
+byte finishedByte = '0';
 
 int s = 15; //speed of change
 int wait = 500; //how long to wait once 180 is reached
